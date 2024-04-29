@@ -1,0 +1,137 @@
+{
+  "personal_details": {
+    "name": "Behnam Ebrahimy",
+    "role": "Senior Front-End Developer",
+    "address": "Tehran, Iran",
+    "stack": "JS"
+  },
+  "social_networks": [
+    {
+      "name": "Linkedin",
+      "socialNetworkLink": "https://linkedin.com/in/behnam-ebrahimy",
+      "displayName": "Behnam Ebrahimy"
+    },
+    {
+      "name": "Git Hub",
+      "socialNetworkLink": "https://github.com/behy75",
+      "displayName": "Behnam Ebrahimy"
+    },
+    {
+      "name": "Email",
+      "socialNetworkLink": "mailto:bebrahimy19@gmail.com",
+      "displayName": "Bebrahimy19@gmail.com"
+    },
+    {
+      "name": "Phone",
+      "socialNetworkLink": "tel:+989186393984",
+      "displayName": "+98(918)6393984"
+    }
+  ],
+  "summary": " As a front-end developer, I bring over 5 years of expertise in React JS development. I have a strong track record of seamlessly collaborating with diverse teams, whether in small or larger groups of up to 10 members. With valuable contributions to over 5 projects, I consistently deliver top-notch solutions. My commitment to promoting teamwork and innovation, allows me to excel in vibrant environments where collaboration is paramount.",
+  "education": [
+    {
+      "university": "University Of Tehran",
+      "dates": "Nov 2020 - Feb 2024",
+      "degree": "Master of Engineering",
+      "major": "Mining Engineering",
+      "minor": "Mineral extraction",
+      "skills": ["Research", "Analysis", "Critical Thinking", "Communication"]
+    },
+    {
+      "university": "Isfahan University Of Technology",
+      "dates": "Jan 2015 - May 2019",
+      "degree": "Bachelor of Engineering",
+      "major": "Mining Engineering",
+      "minor": "Rock Mechanics",
+      "skills": ["Programming", "Algorithms", "Data Structures", "Software Development"]
+    }
+  ],
+  "skills": [
+    "Web-Design",
+    "HTML5",
+    "CSS3",
+    "JavaScript",
+    "TypeScript",
+    "React.js",
+    "Clean-Code",
+    "NoSQL",
+    "Design-Pattern",
+    "Next.js",
+    "PWA",
+    "Webpack&babel",
+    "Tailwind",
+    "UI/UX",
+    "Rest-API’s",
+    "Redux",
+    "React-Query",
+    "Webpack&babel",
+    "Zustand",
+    "Socket.IO",
+    "Test",
+    "Solidity",
+    "Web3",
+    "React-Native",
+    "Vue.js",
+    "Socket.IO",
+    "Node.js",
+    "Express.js",
+    "MongoDB",
+    "MySQL",
+    "AI-Chat"
+  ],
+  "experiences": [
+    {
+      "role": "Senior Front-End Developer",
+      "link": "https://www.workmap.ai/",
+      "from": "Jan 2022",
+      "to": "Present",
+      "nameOfCompany": "HyperOffice Company",
+      "toDoList": [
+        "Led the development team in implementing Workmap's advanced data visualization tools, real-time analytics, and reporting features; boosted user experience and increased data management efficiency for clients.",
+        "Orchestrated the integration of AI Chat tools powered by OpenAI, accelerating the creation of data grids, applications, and columns threefold, leading to a 50% boost in productivity and operational efficiency.",
+        "Integrated Stripe payment system, driving a 25% increase in client transaction processing speed and a 15% rise in company revenue through boosted payment processing.",
+        "Utilized React-to-Print and React-PDF libraries to optimize the printing workflow of data grids and forms, leading to a remarkable 40% acceleration in clients PDF creation process."
+      ]
+    },
+    {
+      "role": "Senior Front-End Developer",
+      "link": "https://nireeka.com/",
+      "from": "Sep 2021",
+      "to": "Jun 2022",
+      "nameOfCompany": "Nireeka Company",
+      "toDoList": [
+        "Designed and developed a bespoke bicycle website with comprehensive tracking capabilities for users bike performance.",
+        "Boosted user experience with an expansive catalog featuring detailed specifications, features, and pricing information.",
+        "Fostered a vibrant social community allowing enthusiasts to interact, troubleshoot, and exchange biking insights.",
+        "Implemented an intuitive admin panel enabling seamless addition of new products and efficient order management for bike vendors.",
+        "After the website launch, realized a 50% surge in sales attributed to its exceptional performance and SEO optimization.",
+        "As a result of the forums effective design, client engagement increased by 30%, fostering a more vibrant community interaction."
+      ]
+    },
+    {
+      "role": "Front-End Developer",
+      "from": "Aug 2019",
+      "to": "May 2021",
+      "nameOfCompany": "Dr. Serita Dental Clinic",
+      "toDoList": [
+        "Spearheaded the development of Progressive Web Applications (PWAs) customized for the dental sector, enabling easy access comprehensive dental information.",
+        "Designed PWAs to seamlessly operate offline, with device installation capabilities, and native-like experiences.",
+        "Boosted accessibility and efficiency in dental care delivery through offline operation and intuitive design.",
+        "Implemented a user-centric interface, intuitive navigation, and seamless functionality for a superior user experience.",
+        "Following the implementation of the applications, patient satisfaction saw a notable uptick of 20%, paralleled by a 15% increase in employee satisfaction levels.",
+        "As a result of developing the web application for cost estimation of dental procedures and patient condition assessment, there was a significant enhancement of 50% in visit efficiency."
+      ]
+    },
+    {
+      "role": "Junior Front-End Developer",
+      "from": "Feb 2018",
+      "to": "Aug 2019",
+      "nameOfCompany": "Talaryab",
+      "toDoList": [
+        "Developed a fluent platform facilitating seamless booking of accommodations, encompassing hotels, conference halls, and diverse venues.",
+        "Provided travelers with a comprehensive one-stop solution for booking their ideal stay, offering search filters based on location, price range, and amenities.",
+        "Incorporated ratings and reviews from previous guests to aid travelers in making informed decisions."
+      ]
+    }
+  ]
+}
