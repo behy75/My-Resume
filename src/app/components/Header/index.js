@@ -1,70 +1,38 @@
-import React, { useState } from 'react';
-import AnimatedCursor from 'react-animated-cursor';
+import React from 'react';
+import { useReactToPrint } from 'react-to-print';
+import { usePrintModeStore } from '@/store';
 import IndividualProfile from '../../Individual_profile.json';
 const personalDetails = IndividualProfile.personal_details;
 
-export default function Header() {
-  const { name, role, address, stack } = personalDetails;
-  const stackArray = stack.split(' ');
-  const [shouldShowCursor, setShouldShowCursor] = useState(true);
-  const handleShouldShowCursor = showCursor => {
-    setShouldShowCursor(showCursor);
+export default function Header(props) {
+  const { containerRef } = props;
+  const { setIsPrintMode } = usePrintModeStore(state => state);
+
+  const handleReactToPrint = useReactToPrint({
+    content: () => containerRef?.current,
+    documentTitle: personalDetails.name,
+    copyStyles: true,
+  });
+
+  const handlePrint = () => {
+    setIsPrintMode(true);
+    setTimeout(() => {
+      handleReactToPrint();
+    }, 100);
+    setTimeout(() => {
+      setIsPrintMode(false);
+    }, 200);
   };
 
   return (
-    <header className="inline-flex justify-between items-baseline mb-2 w-full align-top border-b-4 border-gray-300">
-      {shouldShowCursor && (
-        <AnimatedCursor
-          innerSize={8}
-          outerSize={8}
-          color="193, 11, 111"
-          outerAlpha={0.2}
-          innerScale={0.7}
-          outerScale={10}
-          clickables={[
-            'h1',
-            {
-              target: '.custom',
-              options: {
-                innerSize: 12,
-                outerSize: 12,
-                color: '255, 255, 255',
-                outerAlpha: 0.3,
-                innerScale: 0.7,
-                outerScale: 5,
-              },
-            },
-          ]}
-        />
-      )}
-      <section className="block">
-        <h1
-          // onMouseEnter={() => setShouldShowCursor(true)}
-          // onMouseOut={() => setShouldShowCursor(false)}
-          className="mb-0 text-5xl font-bold text-gray-600 hover:text-gray-700"
-        >
-          {name}
-        </h1>
-        {/* Job Title */}
-        <h2 className="m-0 text-2xl font-semibold text-gray-700 leading-snugish">
-          {role}
-        </h2>
-        {/* Location */}
-        <h3 className="m-0 mt-2 text-xl font-semibold text-gray-500 leading-snugish">
-          {address}
-        </h3>
-      </section>
-      {/* Initials Block */}
-      <section
-        className="justify-between px-3 mt-0 mb-5 text-4xl font-black leading-none text-white bg-gray-700 initials-container print:bg-black"
-        style={{ paddingBottom: '1.5rem', paddingTop: '1.5rem' }}
+    <div className="flex justify-center items-center my-5">
+      <button
+        type="button"
+        onClick={handlePrint}
+        className="py-2.5 px-5 me-2 text-sm font-medium text-gray-900  bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
       >
-        {stackArray.map((stackArr, index) => (
-          <section key={index} className="text-center initial">
-            {stackArr}
-          </section>
-        ))}
-      </section>
-    </header>
+        Print
+      </button>
+    </div>
   );
 }

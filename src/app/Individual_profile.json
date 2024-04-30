@@ -1,7 +1,9 @@
 {
   "personal_details": {
-    "name": "Behnam Ebrahimy",
+    "first_name": "Behnam",
+    "last_name": "Ebrahimy",
     "role": "Senior Front-End Developer",
+    "web_site_url": "",
     "address": "Tehran, Iran",
     "stack": "JS"
   },
