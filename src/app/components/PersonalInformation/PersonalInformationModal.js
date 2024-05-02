@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { usePersonalInformation } from '@/store/PersonalInformation';
+import { usePersonalInformation } from '@/store/usePersonalInformation';
 import DynamicModal from '../customs/DynamicModal';
 
 function PersonalInformationModal() {
@@ -8,7 +8,6 @@ function PersonalInformationModal() {
     lastName,
     position,
     address,
-    webSiteURL,
     stack,
     setPersonalInformation,
   } = usePersonalInformation(state => state);
@@ -17,11 +16,10 @@ function PersonalInformationModal() {
     lastName,
     position,
     address,
-    webSiteURL,
     stack,
   });
 
-  const PersonalInformationFields = [
+  const personalInformationFields = [
     {
       title: 'First name',
       value: state.firstName,
@@ -52,14 +50,6 @@ function PersonalInformationModal() {
       placeholder: 'Tehran, Iran',
     },
     {
-      title: 'Website URL',
-      value: state.webSiteURL,
-      setValue: webSiteURL =>
-        setState(prevState => ({ ...prevState, webSiteURL })),
-      type: 'text',
-      placeholder: '',
-    },
-    {
       title: 'Stack',
       value: state.stack,
       setValue: stack => setState(prevState => ({ ...prevState, stack })),
@@ -75,7 +65,7 @@ function PersonalInformationModal() {
   return (
     <DynamicModal
       title="Personal Information"
-      fields={PersonalInformationFields}
+      fields={personalInformationFields}
       onSubmit={onSubmit}
     />
   );

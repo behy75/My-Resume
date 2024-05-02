@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Transition } from '@tailwindui/react';
 import DropDownSymbol from '../customs/DropDownSymbol';
 import { usePrintModeStore } from '@/store';
 
@@ -43,24 +42,13 @@ export default function Experience(props) {
       </header>
 
       {open && (
-        <Transition
-          show={true}
-          enter="transition ease-out duration-75"
-          enterFrom="transform opacity-0 scale-95"
-          enterTo="transform opacity-100 scale-100"
-          leave="transition ease-in duration-150"
-          leaveFrom="transform opacity-100 scale-100"
-          leaveTo="transform opacity-0 scale-95"
-          className="mt-2 origin-top-right rounded-md shadow-lg z-10"
-        >
-          <ul className="mt-2 list-disc list-inside text-gray-800 text-md">
-            {toDoList.map((achievement, index) => (
-              <li key={index} className="pt-1 text-justify">
-                {achievement}
-              </li>
-            ))}
-          </ul>
-        </Transition>
+        <ul className="mt-2 list-disc list-inside text-gray-800 text-md">
+          {toDoList.map((achievement, index) => (
+            <li key={index} className="pt-1 text-justify">
+              {achievement}
+            </li>
+          ))}
+        </ul>
       )}
     </section>
   );

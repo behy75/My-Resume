@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import TextInput from './Inputs/TextInput';
 import DynamicInput from './Inputs/DynamicInput';
 
 // Higher Order Component to render a modal with dynamic input fields
@@ -12,21 +11,19 @@ const withDynamicModal = WrappedComponent => {
     };
 
     return (
-      <div className="absolute right-0 bottom-1">
+      <div className="absolute right-0 bottom-6">
         <button
           onClick={toggleModal}
           data-modal-target="default-modal"
           data-modal-toggle="default-modal"
           className="right-10 text-xs text-gray-400 text-white bg-white font-medium rounded-lg text-sm p-2 text-center border-2"
           type="button"
-        >
-          Edit
-        </button>
+        ></button>
 
         <div
           id="default-modal"
-          className={`fixed inset-0 z-50 overflow-y-auto ${
-            isOpen ? 'block' : 'hidden'
+          className={`fixed inset-0 z-50 overflow-y-auto items-center justify-center ${
+            isOpen ? 'flex' : 'hidden'
           }`}
         >
           <WrappedComponent
@@ -87,8 +84,10 @@ function ModalContent({ title, fields, toggleModal, onSubmit }) {
                   title={field.title}
                   type={field.type}
                   value={field.value}
+                  displayName={field.displayName}
                   setValue={field.setValue}
                   placeholder={field.placeholder}
+                  isTwoColumn={!!field.isTwoColumn}
                 />
               ))}
             </div>

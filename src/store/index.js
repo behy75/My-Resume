@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import IndividualProfile from '../app/Individual_profile.json';
 
 export const usePrintModeStore = create(set => ({
   isPrintMode: false,
@@ -8,7 +9,8 @@ export const usePrintModeStore = create(set => ({
 
 export const useShowFullSummary = create(set => ({
   showFullSummary: false,
-  setShowFullSummary: newShowFullSummary => {
-    set(state => ({ showFullSummary: newShowFullSummary }));
-  },
+  summary: IndividualProfile.summary,
+  setShowFullSummary: newShowFullSummary =>
+    set(state => ({ showFullSummary: newShowFullSummary })),
+  setSummary: summary => set(state => ({ ...summary })),
 }));

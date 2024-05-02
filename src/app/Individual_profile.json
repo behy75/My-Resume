@@ -10,26 +10,31 @@
   "social_networks": [
     {
       "name": "Linkedin",
-      "socialNetworkLink": "https://linkedin.com/in/behnam-ebrahimy",
+      "link": "https://linkedin.com/in/behnam-ebrahimy",
       "displayName": "Behnam Ebrahimy"
     },
     {
       "name": "Git Hub",
-      "socialNetworkLink": "https://github.com/behy75",
+      "link": "https://github.com/behy75",
       "displayName": "Behnam Ebrahimy"
     },
     {
       "name": "Email",
-      "socialNetworkLink": "mailto:bebrahimy19@gmail.com",
+      "link": "mailto:bebrahimy19@gmail.com",
       "displayName": "Bebrahimy19@gmail.com"
     },
     {
       "name": "Phone",
-      "socialNetworkLink": "tel:+989186393984",
+      "link": "tel:+989186393984",
       "displayName": "+98(918)6393984"
+    },
+    {
+      "name": "Website URL",
+      "link": "",
+      "displayName": ""
     }
   ],
-  "summary": " As a front-end developer, I bring over 5 years of expertise in React JS development. I have a strong track record of seamlessly collaborating with diverse teams, whether in small or larger groups of up to 10 members. With valuable contributions to over 5 projects, I consistently deliver top-notch solutions. My commitment to promoting teamwork and innovation, allows me to excel in vibrant environments where collaboration is paramount.",
+  "summary": "As a front-end developer, I bring over 5 years of expertise in React JS development. I have a strong track record of seamlessly collaborating with diverse teams, whether in small or larger groups of up to 10 members. With valuable contributions to over 5 projects, I consistently deliver top-notch solutions. My commitment to promoting teamwork and innovation, allows me to excel in vibrant environments where collaboration is paramount.",
   "education": [
     {
       "university": "University Of Tehran",

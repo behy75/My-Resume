@@ -1,11 +1,11 @@
 import React from 'react';
 import PersonalInformationModal from './PersonalInformationModal';
-import { usePersonalInformation } from '@/store/PersonalInformation';
+import { usePersonalInformation } from '@/store/usePersonalInformation';
 import { usePrintModeStore } from '@/store';
 
 export default function PersonalInformation() {
   const { isPrintMode } = usePrintModeStore(state => state);
-  const { firstName, lastName, position, address, webSiteURL, stack } =
+  const { firstName, lastName, position, address, stack } =
     usePersonalInformation(state => state);
   const stackArray = stack.split(' ');
 
@@ -29,9 +29,6 @@ export default function PersonalInformation() {
         {/* Location */}
         <h3 className="m-0 mt-2 text-xl font-semibold text-gray-500 leading-snugish">
           {address}
-        </h3>
-        <h3 className="m-0 text-lg font-semibold text-gray-700 leading-snugish">
-          {webSiteURL}
         </h3>
       </section>
       {/* Initials Block */}

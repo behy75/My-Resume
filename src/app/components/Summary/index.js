@@ -1,13 +1,12 @@
-import React from 'react';
-import IndividualProfile from '../../Individual_profile.json';
+import React, { useEffect } from 'react';
 import Typical from 'react-typical';
 import { usePrintModeStore, useShowFullSummary } from '@/store';
 import CheckBox from '../customs/CheckBox';
-const { summary } = IndividualProfile;
+import SummaryModal from './SummaryModal';
 
 export default function Summary() {
   const { isPrintMode } = usePrintModeStore(state => state);
-  const { showFullSummary, setShowFullSummary } = useShowFullSummary(
+  const { showFullSummary, setShowFullSummary, summary } = useShowFullSummary(
     state => state
   );
 
@@ -16,13 +15,17 @@ export default function Summary() {
 
   for (var i = 0; i < summaryArray.length; i++) {
     newArray.push(summaryArray[i]);
-    if (i < summaryArray.length - 1) {
-      newArray.push(1000);
-    }
+    newArray.push(1000);
   }
 
+  useEffect(() => {
+    setShowFullSummary(true);
+    setTimeout(() => setShowFullSummary(false));
+  }, [summary]);
+
   return (
-    <section className="pb-2 pb-4 mt-0 border-b-4 border-gray-300 first:mt-0">
+    <section className="relative pb-2 pb-4 mt-0 border-b-4 border-gray-300 first:mt-0">
+      {!isPrintMode && <SummaryModal title="Summary" />}
       {/* To keep in the same column */}
       <section className="break-inside-avoid">
         <div className="flex items-center mb-2">
