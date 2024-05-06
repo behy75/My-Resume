@@ -9,7 +9,7 @@ export default function SkillsModal() {
 
   const skillsFields = [
     {
-      title: 'New Skill',
+      title: 'Add Skill',
       value: '',
       setValue: newSkill => setState(prevState => [...prevState, newSkill]),
       type: 'text_skill',

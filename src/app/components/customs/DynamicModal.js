@@ -5,13 +5,15 @@ import FieldControls from './FieldControls';
 const withDynamicModal = WrappedComponent => {
   return function DynamicModal({ ...rest }) {
     const [isOpen, setIsOpen] = useState(false);
-
+    const bottomPosition = rest.title.includes('Social')
+      ? 'bottom-6'
+      : 'bottom-1';
     const toggleModal = event => {
       setIsOpen(!isOpen);
     };
-
+    console.log(rest.title, bottomPosition);
     return (
-      <div className="absolute right-0 bottom-6">
+      <div className={`absolute right-0 ${bottomPosition}`}>
         <button
           onClick={toggleModal}
           data-modal-target="default-modal"
