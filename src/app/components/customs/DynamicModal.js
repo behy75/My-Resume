@@ -3,10 +3,10 @@ import FieldControls from './FieldControls';
 
 // Higher Order Component to render a modal with dynamic input fields
 const withDynamicModal = WrappedComponent => {
-  return function DynamicModal({ fields, ...rest }) {
+  return function DynamicModal({ ...rest }) {
     const [isOpen, setIsOpen] = useState(false);
 
-    const toggleModal = () => {
+    const toggleModal = event => {
       setIsOpen(!isOpen);
     };
 
@@ -26,11 +26,7 @@ const withDynamicModal = WrappedComponent => {
             isOpen ? 'flex' : 'hidden'
           }`}
         >
-          <WrappedComponent
-            fields={fields}
-            toggleModal={toggleModal}
-            {...rest}
-          />
+          <WrappedComponent toggleModal={toggleModal} {...rest} />
         </div>
       </div>
     );
@@ -38,7 +34,7 @@ const withDynamicModal = WrappedComponent => {
 };
 
 // Modal component with dynamic input fields
-function ModalContent({ title, fields, toggleModal, onSubmit }) {
+function ModalContent({ title, fields, items = [], toggleModal, onSubmit }) {
   const onSubmitModal = () => {
     onSubmit();
     toggleModal();
@@ -75,6 +71,11 @@ function ModalContent({ title, fields, toggleModal, onSubmit }) {
         </div>
         <div className="p-4 md:p-5 space-y-4 text-white">
           <form>
+            <div class="grid gap-6 mb-6 md:grid-cols-6">
+              {items.map((item, index) => (
+                <div>{item}</div>
+              ))}
+            </div>
             <div class="grid gap-6 mb-6 md:grid-cols-2">
               {fields.map((field, index) => (
                 <FieldControls

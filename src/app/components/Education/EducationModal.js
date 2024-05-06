@@ -66,7 +66,7 @@ function EducationModal() {
     });
   };
 
-  const EducationFields = [
+  const educationFields = [
     {
       title: 'Select Page',
       value: {
@@ -226,7 +226,7 @@ function EducationModal() {
   return (
     <DynamicModal
       title="Education Information"
-      fields={EducationFields}
+      fields={educationFields}
       onSubmit={onSubmit}
     />
   );

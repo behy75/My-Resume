@@ -6,6 +6,7 @@ import TwoColumns from './Inputs/TwoColumns';
 import Textarea from './Inputs/Textarea';
 import SelectPageInput from './Inputs/SelectPageInput';
 import Button from './Buttons';
+import TextInputForSkill from './Inputs/TextInputForSkill';
 
 export default function FieldControls({ type, isTwoColumn, ...rest }) {
   if (isTwoColumn) {
@@ -14,6 +15,8 @@ export default function FieldControls({ type, isTwoColumn, ...rest }) {
   switch (type) {
     case 'text':
       return <TextInput {...rest} />;
+    case 'text_skill':
+      return <TextInputForSkill {...rest} />;
     case 'phone':
       return <PhoneInput {...rest} />;
     case 'email':
