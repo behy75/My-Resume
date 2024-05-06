@@ -18,7 +18,7 @@ export default function PhoneInput(props) {
     <div>
       <label
         for="phone-input"
-        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        class="block mb-2 text-sm font-medium text-white dark:text-white"
       >
         {title}
       </label>

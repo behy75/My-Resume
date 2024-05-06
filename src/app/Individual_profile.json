@@ -35,21 +35,25 @@
     }
   ],
   "summary": "As a front-end developer, I bring over 5 years of expertise in React JS development. I have a strong track record of seamlessly collaborating with diverse teams, whether in small or larger groups of up to 10 members. With valuable contributions to over 5 projects, I consistently deliver top-notch solutions. My commitment to promoting teamwork and innovation, allows me to excel in vibrant environments where collaboration is paramount.",
-  "education": [
+  "colleges": [
     {
-      "university": "University Of Tehran",
-      "dates": "Nov 2020 - Feb 2024",
-      "degree": "Master of Engineering",
+      "nameOfCollege": "University Of Tehran",
+      "arrivalDate": "Nov 2020",
+      "departureDate": "Feb 2024",
+      "field": "Master of Engineering",
       "major": "Mining Engineering",
       "minor": "Mineral extraction",
+      "grade": "",
       "skills": ["Research", "Analysis", "Critical Thinking", "Communication"]
     },
     {
-      "university": "Isfahan University Of Technology",
-      "dates": "Jan 2015 - May 2019",
-      "degree": "Bachelor of Engineering",
+      "nameOfCollege": "Isfahan University Of Technology",
+      "arrivalDate": "Jan 2015",
+      "departureDate": "May 2019",
+      "field": "Bachelor of Engineering",
       "major": "Mining Engineering",
       "minor": "Rock Mechanics",
+      "grade": "",
       "skills": ["Programming", "Algorithms", "Data Structures", "Software Development"]
     }
   ],

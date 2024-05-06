@@ -7,7 +7,7 @@ export default function TextInput(props) {
     <div>
       <label
         for={title.replace(/[A-Z]/g, match => '_' + match.toLowerCase())}
-        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        class="block mb-2 text-sm font-medium text-white"
       >
         {title}
       </label>

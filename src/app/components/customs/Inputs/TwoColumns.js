@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import TextInput from './TextInput';
-import DynamicInput from './DynamicInput';
+import FieldControls from '../FieldControls';
 
 export default function TwoColumns(props) {
   const { title, setValue, displayName, value } = props;
@@ -18,7 +18,7 @@ export default function TwoColumns(props) {
         }
         title={`Display Name of ${title}`}
       />
-      <DynamicInput
+      <FieldControls
         {...props}
         isTwoColumn={false}
         title={`Link`}

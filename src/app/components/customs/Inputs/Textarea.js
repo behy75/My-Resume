@@ -5,13 +5,13 @@ export default function Textarea(props) {
   return (
     <div className="col-span-2">
       <label
-        for="message"
-        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        for={title}
+        class="block mb-2 text-sm font-medium text-white"
       >
         {title}
       </label>
       <textarea
-        id="message"
+        id={title}
         defaultValue={value}
         onChange={event => setValue(event.target.value)}
         rows="4"
