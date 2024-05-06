@@ -11,7 +11,7 @@ const withDynamicModal = WrappedComponent => {
     const toggleModal = event => {
       setIsOpen(!isOpen);
     };
-    console.log(rest.title, bottomPosition);
+
     return (
       <div className={`absolute right-0 ${bottomPosition}`}>
         <button

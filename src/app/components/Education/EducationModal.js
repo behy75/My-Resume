@@ -5,7 +5,7 @@ import {
   handleRemovePage,
   handleSelectPage,
   handleSetValue,
-} from './EducationModalActions';
+} from './EducationActions';
 
 function EducationModal() {
   const { colleges, setColleges } = useEducation(state => state);
