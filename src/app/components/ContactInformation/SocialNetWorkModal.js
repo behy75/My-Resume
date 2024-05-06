@@ -21,7 +21,7 @@ function SocialNetWorkModal(props) {
       displayName: webSite.displayName,
       setValue: webSite => setState(prevState => ({ ...prevState, webSite })),
       type: 'text',
-      placeholder: '',
+      placeholder: 'https://www.example.com',
       isTwoColumn: true,
     },
     {
@@ -30,7 +30,7 @@ function SocialNetWorkModal(props) {
       displayName: linkedin.displayName,
       setValue: linkedin => setState(prevState => ({ ...prevState, linkedin })),
       type: 'text',
-      placeholder: 'https://www.linkedin.com/in/behnam-ebrahimy/',
+      placeholder: 'https://www.linkedin.com',
       isTwoColumn: true,
     },
     {
@@ -39,7 +39,7 @@ function SocialNetWorkModal(props) {
       displayName: gitHub.displayName,
       setValue: gitHub => setState(prevState => ({ ...prevState, gitHub })),
       type: 'text',
-      placeholder: 'https://github.com/behy75',
+      placeholder: 'https://github.com',
       isTwoColumn: true,
     },
     {
@@ -48,7 +48,7 @@ function SocialNetWorkModal(props) {
       displayName: email.displayName,
       setValue: email => setState(prevState => ({ ...prevState, email })),
       type: 'email',
-      placeholder: 'Bebrahimy19@gmail.com',
+      placeholder: 'example@example.com',
       isTwoColumn: true,
     },
     {
