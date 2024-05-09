@@ -40,7 +40,7 @@ export default function TextInputForSkill(props) {
         onClick={handleClick}
         data-modal-hide="default-modal"
         type="button"
-        className={`ml-3 w-28 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5`}
+        className={`ml-3 w-28 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-20`}
       >
         {title}
       </button>

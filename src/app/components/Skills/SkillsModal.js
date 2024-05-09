@@ -25,7 +25,13 @@ export default function SkillsModal() {
     <DynamicModal
       title="Skills"
       fields={skillsFields}
-      items={state}
+      items={state.map(item => ({
+        name: item,
+        removeItem: id =>
+          setState(preState =>
+            preState.filter((preState, index) => index !== id)
+          ),
+      }))}
       onSubmit={onSubmit}
     />
   );

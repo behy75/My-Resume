@@ -75,7 +75,27 @@ function ModalContent({ title, fields, items = [], toggleModal, onSubmit }) {
           <form>
             <div class="grid gap-6 mb-6 md:grid-cols-6">
               {items.map((item, index) => (
-                <div>{item}</div>
+                <div key={index} className="relative">
+                  <div
+                    onClick={() => item.removeItem(index)}
+                    className="absolute -top-2 -left-2"
+                  >
+                    <svg
+                      class="text-gray-400 dark:text-gray-500 w-3 h-3"
+                      aria-hidden="true"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                        clip-rule="evenodd"
+                      ></path>
+                    </svg>
+                  </div>
+                  {item.name}
+                </div>
               ))}
             </div>
             <div class="grid gap-6 mb-6 md:grid-cols-2">
@@ -99,7 +119,7 @@ function ModalContent({ title, fields, items = [], toggleModal, onSubmit }) {
             onClick={toggleModal}
             data-modal-hide="default-modal"
             type="button"
-            className="py-2.5 px-5 text-sm font-medium focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+            className="py-2.5 w-20 text-sm font-medium focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
           >
             Decline
           </button>
@@ -107,7 +127,7 @@ function ModalContent({ title, fields, items = [], toggleModal, onSubmit }) {
             onClick={onSubmitModal}
             data-modal-hide="default-modal"
             type="button"
-            className="text-white ms-3 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="text-white ms-3 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-20 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             Save
           </button>
