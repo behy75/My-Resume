@@ -1,11 +1,16 @@
 import React from 'react';
+import { usePrintModeStore } from '@/store';
+import { useExperience } from '@/store/useExperience';
 import Experience from './Experience';
-import IndividualProfile from '../../Individual_profile.json';
-const { experiences } = IndividualProfile;
+import ExperiencesModal from './ExperiencesModal';
 
 export default function Experiences() {
+  const { isPrintMode } = usePrintModeStore(state => state);
+  const { experiences } = useExperience(state => state);
   return (
-    <section className="pb-2 pb-4 mt-4 border-b-4 border-gray-300 first:mt-0">
+    <section className="relative pb-2 pb-4 mt-4 border-b-4 border-gray-300 first:mt-0">
+      {!isPrintMode && <ExperiencesModal title="Experiences" />}
+
       {/* To keep in the same column */}
       <section className="break-inside-avoid">
         <h2 className="mb-2 text-xl font-black tracking-widest text-gray-800 print:font-normal">
@@ -16,11 +21,11 @@ export default function Experiences() {
           <>
             <Experience
               role={experience.role}
-              link={experience.link}
-              from={experience.from}
-              to={experience.to}
+              websiteURL={experience.websiteURL}
+              arrivalDate={experience.arrivalDate}
+              departureDate={experience.departureDate}
               nameOfCompany={experience.nameOfCompany}
-              toDoList={experience.toDoList}
+              activities={experience.activities}
             />
           </>
         ))}

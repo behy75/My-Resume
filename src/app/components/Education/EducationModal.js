@@ -43,7 +43,7 @@ function EducationModal() {
     {
       title: 'Name of College',
       value: state.listOfEducation[state.pageNumber].nameOfCollege,
-      setValue: field =>
+      setValue: nameOfCollege =>
         handleSetValue('nameOfCollege', nameOfCollege, setState),
       type: 'text',
       placeholder: 'Name Of College',

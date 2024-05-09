@@ -92,11 +92,11 @@
   "experiences": [
     {
       "role": "Senior Front-End Developer",
-      "link": "https://www.workmap.ai/",
-      "from": "Jan 2022",
-      "to": "Present",
+      "websiteURL": "https://www.workmap.ai/",
+      "arrivalDate": "Jan 2022",
+      "departureDate": "Present",
       "nameOfCompany": "HyperOffice Company",
-      "toDoList": [
+      "activities": [
         "Led the development team in implementing Workmap's advanced data visualization tools, real-time analytics, and reporting features; boosted user experience and increased data management efficiency for clients.",
         "Orchestrated the integration of AI Chat tools powered by OpenAI, accelerating the creation of data grids, applications, and columns threefold, leading to a 50% boost in productivity and operational efficiency.",
         "Integrated Stripe payment system, driving a 25% increase in client transaction processing speed and a 15% rise in company revenue through boosted payment processing.",
@@ -105,11 +105,11 @@
     },
     {
       "role": "Senior Front-End Developer",
-      "link": "https://nireeka.com/",
-      "from": "Sep 2021",
-      "to": "Jun 2022",
+      "websiteURL": "https://nireeka.com/",
+      "arrivalDate": "Sep 2021",
+      "departureDate": "Jun 2022",
       "nameOfCompany": "Nireeka Company",
-      "toDoList": [
+      "activities": [
         "Designed and developed a bespoke bicycle website with comprehensive tracking capabilities for users bike performance.",
         "Boosted user experience with an expansive catalog featuring detailed specifications, features, and pricing information.",
         "Fostered a vibrant social community allowing enthusiasts to interact, troubleshoot, and exchange biking insights.",
@@ -120,10 +120,10 @@
     },
     {
       "role": "Front-End Developer",
-      "from": "Aug 2019",
-      "to": "May 2021",
+      "arrivalDate": "Aug 2019",
+      "departureDate": "May 2021",
       "nameOfCompany": "Dr. Serita Dental Clinic",
-      "toDoList": [
+      "activities": [
         "Spearheaded the development of Progressive Web Applications (PWAs) customized for the dental sector, enabling easy access comprehensive dental information.",
         "Designed PWAs to seamlessly operate offline, with device installation capabilities, and native-like experiences.",
         "Boosted accessibility and efficiency in dental care delivery through offline operation and intuitive design.",
@@ -134,10 +134,10 @@
     },
     {
       "role": "Junior Front-End Developer",
-      "from": "Feb 2018",
-      "to": "Aug 2019",
+      "arrivalDate": "Feb 2018",
+      "departureDate": "Aug 2019",
       "nameOfCompany": "Talaryab",
-      "toDoList": [
+      "activities": [
         "Developed a fluent platform facilitating seamless booking of accommodations, encompassing hotels, conference halls, and diverse venues.",
         "Provided travelers with a comprehensive one-stop solution for booking their ideal stay, offering search filters based on location, price range, and amenities.",
         "Incorporated ratings and reviews from previous guests to aid travelers in making informed decisions."

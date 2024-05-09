@@ -4,7 +4,14 @@ import DropDownSymbol from '../customs/DropDownSymbol';
 import { usePrintModeStore } from '@/store';
 
 export default function Experience(props) {
-  const { role, link, from, to, nameOfCompany, toDoList = [] } = props;
+  const {
+    role,
+    websiteURL,
+    arrivalDate,
+    departureDate,
+    nameOfCompany,
+    activities = [],
+  } = props;
   const { isPrintMode } = usePrintModeStore(state => state);
   const [open, setOpen] = useState(false);
 
@@ -24,10 +31,10 @@ export default function Experience(props) {
         <div onClick={handleSetOpen} className="flex items-center">
           <h3 className="font-semibold text-gray-800 text-md leading-snugish">
             {role}{' '}
-            {link && (
+            {websiteURL && (
               <>
                 |{' '}
-                <Link target="_blank" href={link}>
+                <Link target="_blank" href={websiteURL}>
                   Link
                 </Link>
               </>
@@ -37,16 +44,20 @@ export default function Experience(props) {
         </div>
 
         <p className="text-sm leading-normal text-gray-500">
-          {from} &ndash; {to} | {nameOfCompany}
+          {arrivalDate} &ndash; {departureDate} | {nameOfCompany}
         </p>
       </header>
 
       {open && (
         <ul className="mt-2 list-disc list-inside text-gray-800 text-md">
-          {toDoList.map((achievement, index) => (
-            <li key={index} className="pt-1 text-justify">
-              {achievement}
-            </li>
+          {activities.map((activity, index) => (
+            <>
+              {!!activity && (
+                <li key={index} className="pt-1 text-justify">
+                  {activity}
+                </li>
+              )}
+            </>
           ))}
         </ul>
       )}

@@ -2,20 +2,18 @@ export const handleSelectPage = (val, setState) => {
   if (val == 'new') {
     setState(prevState => ({
       ...prevState,
-      listOfEducation: [
-        ...prevState.listOfEducation,
+      listOfExperiences: [
+        ...prevState.listOfExperiences,
         {
-          nameOfCollege: '',
+          role: '',
+          nameOfCompany: '',
+          websiteURL: '',
           arrivalDate: '',
           departureDate: '',
-          field: '',
-          major: '',
-          minor: '',
-          grade: '',
-          skills: [],
+          toDoList: [],
         },
       ],
-      pageNumber: prevState.listOfEducation.length,
+      pageNumber: prevState.listOfExperiences.length,
     }));
     return;
   }
@@ -23,15 +21,15 @@ export const handleSelectPage = (val, setState) => {
 };
 
 export const handleRemovePage = (state, setState) => {
-  if (state.listOfEducation.length == 1) {
+  if (state.listOfExperiences.length == 1) {
     return;
   }
 
   setTimeout(() => {
     setState(prevState => ({
       ...prevState,
-      listOfEducation: [
-        ...prevState.listOfEducation.filter(
+      listOfExperiences: [
+        ...prevState.listOfExperiences.filter(
           (item, index) => index !== state.pageNumber
         ),
       ],
@@ -41,17 +39,22 @@ export const handleRemovePage = (state, setState) => {
 };
 
 export const handleSetValue = (item, field, setState) => {
-  const newField = item == 'skills' ? field.split(',') : field;
+  const newField =
+    item == 'skills'
+      ? field.split(',')
+      : item == 'activities'
+      ? field.split('\n')
+      : field;
 
   setState(prevState => {
-    const updatedListOfEducation = [...prevState.listOfEducation];
-    updatedListOfEducation[prevState.pageNumber] = {
-      ...updatedListOfEducation[prevState.pageNumber],
+    const updatedListOfExperiences = [...prevState.listOfExperiences];
+    updatedListOfExperiences[prevState.pageNumber] = {
+      ...updatedListOfExperiences[prevState.pageNumber],
       [item]: newField,
     };
     return {
       ...prevState,
-      listOfEducation: updatedListOfEducation,
+      listOfExperiences: updatedListOfExperiences,
     };
   });
 };
