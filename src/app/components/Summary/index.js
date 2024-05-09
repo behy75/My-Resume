@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Typical from 'react-typical';
 import { usePrintModeStore, useShowFullSummary } from '@/store';
-import CheckBox from '../customs/CheckBox';
+import CheckBox from '../Common/CheckBox';
 import SummaryModal from './SummaryModal';
 
 export default function Summary() {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import DropDownSymbol from '../customs/DropDownSymbol';
+import DropDownSymbol from '../Common/DropDownSymbol';
 import { usePrintModeStore } from '@/store';
 
 export default function Experience(props) {

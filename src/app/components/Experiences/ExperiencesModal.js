@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useExperience } from '@/store/useExperience';
-import DynamicModal from '../customs/DynamicModal';
+import DynamicModal from '../Common/DynamicModal';
 import {
   handleRemovePage,
   handleSelectPage,

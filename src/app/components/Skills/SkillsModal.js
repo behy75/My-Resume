@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSkills } from '@/store/useSkills';
-import DynamicModal from '../customs/DynamicModal';
+import DynamicModal from '../Common/DynamicModal';
 import { SKILLS_INFORMATION_STATISTICS } from '@/app/utils';
 const { ADD_SKILL } = SKILLS_INFORMATION_STATISTICS;
 

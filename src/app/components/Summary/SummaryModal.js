@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useShowFullSummary } from '@/store';
-import DynamicModal from '../customs/DynamicModal';
+import DynamicModal from '../Common/DynamicModal';
 import { SUMMARY_INFORMATION_STATISTICS } from '@/app/utils';
 const { SUMMARY } = SUMMARY_INFORMATION_STATISTICS;
 

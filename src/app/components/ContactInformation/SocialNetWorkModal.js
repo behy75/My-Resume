@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useContactInformation } from '@/store/useContactInformation';
-import DynamicModal from '../customs/DynamicModal';
+import DynamicModal from '../Common/DynamicModal';
 import { CONTACT_INFORMATION_STATISTICS } from '@/app/utils';
 const { WEBSITE_URL, LINKEDIN, GITHUB, EMAIL, PHONE } =
   CONTACT_INFORMATION_STATISTICS;

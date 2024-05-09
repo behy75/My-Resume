@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { usePersonalInformation } from '@/store/usePersonalInformation';
-import DynamicModal from '../customs/DynamicModal';
+import DynamicModal from '../Common/DynamicModal';
 import { PERSONAL_INFORMATION_STATISTICS } from '@/app/utils';
 const { FIRST_NAME, LAST_NAME, POSITION, ADDRESS, STACK } =
   PERSONAL_INFORMATION_STATISTICS;
