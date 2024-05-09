@@ -18,16 +18,16 @@ export default function PersonalInformation() {
         <h1
           // onMouseEnter={() => setShouldShowCursor(true)}
           // onMouseOut={() => setShouldShowCursor(false)}
-          className="mb-0 text-5xl font-bold text-gray-600 hover:text-gray-700"
+          className="mb-0 text-3xl sm:text-5xl font-bold text-gray-600 hover:text-gray-700"
         >
           {firstName} {lastName}
         </h1>
         {/* Job Title */}
-        <h2 className="m-0 text-2xl font-semibold text-gray-700 leading-snugish">
+        <h2 className="m-0 text-lg sm:text-2xl font-semibold text-gray-700 leading-snugish">
           {position}
         </h2>
         {/* Location */}
-        <h3 className="m-0 mt-2 text-xl font-semibold text-gray-500 leading-snugish">
+        <h3 className="m-0 mt-2 text-md sm:text-xl font-semibold text-gray-500 leading-snugish">
           {address}
         </h3>
       </section>

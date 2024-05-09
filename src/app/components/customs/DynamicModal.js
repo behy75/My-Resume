@@ -81,13 +81,14 @@ function ModalContent({
           <form>
             <div className="grid gap-6 mb-6 md:grid-cols-6">
               {items.map((item, index) => (
-                <div key={index} className="relative">
-                  <div
-                    onClick={() => item.removeItem(index)}
-                    className="absolute -top-2 -left-2"
-                  >
+                <div
+                  onClick={() => item.removeItem(index)}
+                  key={index}
+                  className="relative flex justify-center items-center"
+                >
+                  <div className="pr-1">
                     <svg
-                      className="text-gray-400 dark:text-gray-500 w-3 h-3"
+                      className="text-gray-400 dark:text-gray-500 w-5 h-5"
                       aria-hidden="true"
                       fill="currentColor"
                       viewBox="0 0 20 20"

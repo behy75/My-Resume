@@ -24,7 +24,7 @@ export default function TextInputForSkill(props) {
   }, []);
 
   return (
-    <div className="absolute left-5 bottom-5 flex">
+    <div className="absolute left-1 sm:left-5 bottom-20 sm:bottom-5 flex">
       <input
         ref={inputRef}
         autoFocus
