@@ -7,7 +7,6 @@ export default function PhoneInput(props) {
     setValue({ email: { link: event.target.value } });
     setPhoneNumber(event.target.value);
   };
-
   const validatePhoneNumber = phone => {
     // Regular expression for validating email format
     const phoneRegex = /tel:(\+\d+)/;

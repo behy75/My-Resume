@@ -9,8 +9,8 @@ export default function TwoColumns(props) {
   useEffect(() => setValue(state), [state]);
 
   return (
-    <div className="flex justify-between col-span-2">
-      <div style={{ width: '48.5%' }}>
+    <div className="sm:flex justify-between sm:col-span-2">
+      <div className="sm:w-[48.5%]">
         <FieldControls
           {...props}
           value={state.displayName}
@@ -18,14 +18,14 @@ export default function TwoColumns(props) {
             setState(prevState => ({ ...prevState, displayName }))
           }
           title={`Display Name of ${title}`}
-          type={'text'}
+          type="text"
         />
       </div>
-      <div style={{ width: '48.5%' }}>
+      <div className="mt-5 sm:mt-0 sm:w-[48.5%]">
         <FieldControls
           {...props}
           isTwoColumn={false}
-          title={`Link`}
+          title="Link"
           value={state.link}
           setValue={link => setState(prevState => ({ ...prevState, link }))}
         />
