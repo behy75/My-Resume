@@ -50,9 +50,7 @@ function SocialNetWorkModal(props) {
     },
   ];
 
-  const onSubmit = () => {
-    setContactInformation({ ...state });
-  };
+  const onSubmit = () => setContactInformation({ ...state });
 
   return (
     <DynamicModal

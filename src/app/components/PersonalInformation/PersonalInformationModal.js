@@ -50,10 +50,8 @@ function PersonalInformationModal() {
       setValue: stack => setState(prevState => ({ ...prevState, stack })),
     },
   ];
-  console.log(FIRST_NAME);
-  const onSubmit = () => {
-    setPersonalInformation({ ...state });
-  };
+
+  const onSubmit = () => setPersonalInformation({ ...state });
 
   return (
     <DynamicModal

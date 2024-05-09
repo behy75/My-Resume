@@ -20,7 +20,7 @@ export default function DatePicker(props) {
       month: 'short',
       year: 'numeric',
     });
-    console.log(formattedDate);
+
     setTime(inputValue);
     if (currentFormattedDate() == formattedDate) {
       setValue('Present');

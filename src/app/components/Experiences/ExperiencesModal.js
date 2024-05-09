@@ -76,9 +76,7 @@ export default function ExperiencesModal() {
     },
   ];
 
-  const onSubmit = () => {
-    setExperiences([...state.listOfExperiences]);
-  };
+  const onSubmit = () => setExperiences([...state.listOfExperiences]);
 
   return (
     <DynamicModal

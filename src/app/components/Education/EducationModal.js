@@ -87,9 +87,7 @@ function EducationModal() {
     },
   ];
 
-  const onSubmit = () => {
-    setColleges([...state.listOfEducation]);
-  };
+  const onSubmit = () => setColleges([...state.listOfEducation]);
 
   return (
     <DynamicModal
