@@ -1,5 +1,15 @@
 import React, { useEffect, useState } from 'react';
 
+const formattedDateFunc = (month, year) =>
+  `${year}-${month.toString().padStart(2, '0')}`;
+
+const currentFormattedDate = () => {
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  const currentMonth = currentDate.getMonth() + 1;
+  return formattedDateFunc(currentMonth, currentYear);
+};
+
 export default function DatePicker(props) {
   const { title, placeholder, value, setValue } = props;
   const [time, setTime] = useState(null);
@@ -10,18 +20,28 @@ export default function DatePicker(props) {
       month: 'short',
       year: 'numeric',
     });
+    console.log(formattedDate);
     setTime(inputValue);
-    setValue(formattedDate);
+    if (currentFormattedDate() == formattedDate) {
+      setValue('Present');
+    } else {
+      setValue(formattedDate);
+    }
   };
 
   useEffect(() => {
+    if (value == 'Present') {
+      setTime(currentFormattedDate());
+      return;
+    }
     const dateParts = value.split(' ');
     const year = dateParts[1];
     const month =
       new Date(Date.parse(dateParts[0] + ' 1, 2000')).getMonth() + 1;
-    const formattedDate = `${year}-${month.toString().padStart(2, '0')}`;
+    const formattedDate = formattedDateFunc(month, year);
+
     setTime(formattedDate);
-  }, []);
+  }, [value]);
 
   return (
     <div>
@@ -48,7 +68,7 @@ export default function DatePicker(props) {
           datepicker-autohide
           type="month"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder={placeholder}
+          placeholder="YYYY-MM"
           value={time}
           onChange={handleSelectDate}
         />

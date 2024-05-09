@@ -52,7 +52,7 @@ export default function ExperiencesModal() {
       value: state.listOfExperiences[state.pageNumber].arrivalDate,
       setValue: arrivalDate =>
         handleSetValue('arrivalDate', arrivalDate, setState),
-      type: 'text',
+      type: 'date_picker',
       placeholder: 'Arrival',
     },
     {
@@ -60,7 +60,7 @@ export default function ExperiencesModal() {
       value: state.listOfExperiences[state.pageNumber].departureDate,
       setValue: departureDate =>
         handleSetValue('departureDate', departureDate, setState),
-      type: 'text',
+      type: 'date_picker',
       placeholder: 'Departure',
     },
     {
@@ -73,8 +73,9 @@ export default function ExperiencesModal() {
     },
     {
       title: 'Activities',
-      value: state.listOfExperiences[state.pageNumber].activities.join("\n"),
-      setValue: activities => handleSetValue('activities', activities, setState),
+      value: state.listOfExperiences[state.pageNumber].activities.join('\n'),
+      setValue: activities =>
+        handleSetValue('activities', activities, setState),
       type: 'text_area',
       placeholder: 'Activities',
     },
