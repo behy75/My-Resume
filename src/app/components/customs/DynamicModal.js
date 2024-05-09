@@ -79,7 +79,7 @@ function ModalContent({
         </div>
         <div className="p-4 md:p-5 space-y-4 text-white">
           <form>
-            <div class="grid gap-6 mb-6 md:grid-cols-6">
+            <div className="grid gap-6 mb-6 md:grid-cols-6">
               {items.map((item, index) => (
                 <div key={index} className="relative">
                   <div
@@ -87,7 +87,7 @@ function ModalContent({
                     className="absolute -top-2 -left-2"
                   >
                     <svg
-                      class="text-gray-400 dark:text-gray-500 w-3 h-3"
+                      className="text-gray-400 dark:text-gray-500 w-3 h-3"
                       aria-hidden="true"
                       fill="currentColor"
                       viewBox="0 0 20 20"
@@ -104,7 +104,7 @@ function ModalContent({
                 </div>
               ))}
             </div>
-            <div class="grid gap-6 mb-6 md:grid-cols-2">
+            <div className="grid gap-6 mb-6 md:grid-cols-2">
               {fields.map((field, index) => (
                 <FieldControls
                   key={index}

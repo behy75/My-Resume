@@ -18,14 +18,14 @@ export default function PhoneInput(props) {
     <div>
       <label
         for="phone-input"
-        class="block mb-2 text-sm font-medium text-white dark:text-white"
+        className="block mb-2 text-sm font-medium text-white dark:text-white"
       >
         {title}
       </label>
-      <div class="relative">
-        <div class="absolute inset-y-0 start-0 top-0 flex items-center ps-3.5 pointer-events-none">
+      <div className="relative">
+        <div className="absolute inset-y-0 start-0 top-0 flex items-center ps-3.5 pointer-events-none">
           <svg
-            class="w-4 h-4 text-gray-500 dark:text-gray-400"
+            className="w-4 h-4 text-gray-500 dark:text-gray-400"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="currentColor"
@@ -40,7 +40,7 @@ export default function PhoneInput(props) {
           onChange={handleChange}
           defaultValue={value}
           aria-describedby="helper-text-explanation"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
           placeholder={placeholder}
           required
@@ -49,7 +49,7 @@ export default function PhoneInput(props) {
       {!validatePhoneNumber(phoneNumber) && (
         <p
           id="helper-text-explanation"
-          class="mt-2 text-sm text-gray-500 dark:text-gray-400"
+          className="mt-2 text-sm text-gray-500 dark:text-gray-400"
         >
           Select a phone number that matches the format.
         </p>

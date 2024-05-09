@@ -1,17 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import TextInput from './Inputs/TextInput';
 import PhoneInput from './Inputs/PhoneInput';
 import EmailInput from './Inputs/EmailInput';
-import TwoColumns from './Inputs/TwoColumns';
+import TwoColumns from './TwoColumns';
 import Textarea from './Inputs/Textarea';
 import SelectPageInput from './Inputs/SelectPageInput';
-import Button from './Buttons';
 import TextInputForSkill from './Inputs/TextInputForSkill';
+import Button from './Buttons';
+import DatePicker from './Inputs/DatePicker';
 
-export default function FieldControls({ type, isTwoColumn, ...rest }) {
+function FieldControls({ type, isTwoColumn, ...rest }) {
   if (isTwoColumn) {
     return <TwoColumns {...rest} type={type} />;
   }
+
   switch (type) {
     case 'text':
       return <TextInput {...rest} />;
@@ -25,9 +28,28 @@ export default function FieldControls({ type, isTwoColumn, ...rest }) {
       return <Textarea {...rest} />;
     case 'select_page':
       return <SelectPageInput {...rest} />;
+    case 'date_picker':
+      return <DatePicker {...rest} />;
     case 'button':
       return <Button {...rest} />;
     default:
-      return null; // Render nothing for unknown types
+      console.error(`Invalid input type: ${type}`);
+      return null;
   }
 }
+
+FieldControls.propTypes = {
+  type: PropTypes.oneOf([
+    'text',
+    'text_skill',
+    'phone',
+    'email',
+    'text_area',
+    'select_page',
+    'date_picker',
+    'button',
+  ]).isRequired,
+  isTwoColumn: PropTypes.bool,
+};
+
+export default FieldControls;

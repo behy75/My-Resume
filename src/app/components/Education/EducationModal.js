@@ -53,7 +53,7 @@ function EducationModal() {
       value: state.listOfEducation[state.pageNumber].arrivalDate,
       setValue: arrivalDate =>
         handleSetValue('arrivalDate', arrivalDate, setState),
-      type: 'text',
+      type: 'date_picker',
       placeholder: 'Arrival',
     },
     {
@@ -61,7 +61,7 @@ function EducationModal() {
       value: state.listOfEducation[state.pageNumber].departureDate,
       setValue: departureDate =>
         handleSetValue('departureDate', departureDate, setState),
-      type: 'text',
+      type: 'date_picker',
       placeholder: 'Departure',
     },
     {
