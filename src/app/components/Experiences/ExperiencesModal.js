@@ -73,7 +73,7 @@ export default function ExperiencesModal() {
     },
     {
       title: 'Activities',
-      value: state.listOfExperiences[state.pageNumber].activities.join("\n\n"),
+      value: state.listOfExperiences[state.pageNumber].activities.join("\n"),
       setValue: activities => handleSetValue('activities', activities, setState),
       type: 'text_area',
       placeholder: 'Activities',
