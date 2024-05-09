@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useSkills } from '@/store/useSkills';
 import DynamicModal from '../customs/DynamicModal';
+import { SKILLS_INFORMATION_STATISTICS } from '@/app/utils';
+const { ADD_SKILL } = SKILLS_INFORMATION_STATISTICS;
 
 export default function SkillsModal() {
   const { skills, setSkills } = useSkills(state => state);
@@ -9,17 +11,13 @@ export default function SkillsModal() {
 
   const skillsFields = [
     {
-      title: 'Add Skill',
+      ...ADD_SKILL,
       value: '',
       setValue: newSkill => setState(prevState => [...prevState, newSkill]),
-      type: 'text_skill',
-      placeholder: 'New Skill',
     },
   ];
 
-  const onSubmit = event => {
-    setSkills([...state]);
-  };
+  const onSubmit = () => setSkills([...state]);
 
   return (
     <DynamicModal

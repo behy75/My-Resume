@@ -6,6 +6,19 @@ import {
   handleSelectPage,
   handleSetValue,
 } from './EducationActions';
+import { EDUCATION_STATISTICS } from '@/app/utils';
+const {
+  SELECT_PAGE,
+  REMOVE_PAGE,
+  FIELD,
+  NAME_OF_COLLEGE,
+  ARRIVAL_DATE,
+  DEPARTURE_DATE,
+  MAJOR,
+  MINOR,
+  GRADE,
+  SKILLS,
+} = EDUCATION_STATISTICS;
 
 function EducationModal() {
   const { colleges, setColleges } = useEducation(state => state);
@@ -17,80 +30,60 @@ function EducationModal() {
 
   const educationFields = [
     {
-      title: 'Select Page',
+      ...SELECT_PAGE,
       value: {
         pageNumber: state.pageNumber,
         lengthOfPages: state.listOfEducation.length,
       },
       setValue: val => handleSelectPage(val, setState),
-      type: 'select_page',
-      placeholder: 'Select Page',
     },
     {
-      title: 'Remove',
+      ...REMOVE_PAGE,
       value: state.listOfEducation.length,
       setValue: () => handleRemovePage(state, setState),
-      type: 'button',
-      placeholder: 'Remove Page',
     },
     {
-      title: 'Field',
+      ...FIELD,
       value: state.listOfEducation[state.pageNumber].field,
       setValue: field => handleSetValue('field', field, setState),
-      type: 'text',
-      placeholder: 'Field',
     },
     {
-      title: 'Name of College',
+      ...NAME_OF_COLLEGE,
       value: state.listOfEducation[state.pageNumber].nameOfCollege,
       setValue: nameOfCollege =>
         handleSetValue('nameOfCollege', nameOfCollege, setState),
-      type: 'text',
-      placeholder: 'Name Of College',
     },
     {
-      title: 'Arrival Date',
+      ...ARRIVAL_DATE,
       value: state.listOfEducation[state.pageNumber].arrivalDate,
       setValue: arrivalDate =>
         handleSetValue('arrivalDate', arrivalDate, setState),
-      type: 'date_picker',
-      placeholder: 'Arrival',
     },
     {
-      title: 'Departure Date',
+      ...DEPARTURE_DATE,
       value: state.listOfEducation[state.pageNumber].departureDate,
       setValue: departureDate =>
         handleSetValue('departureDate', departureDate, setState),
-      type: 'date_picker',
-      placeholder: 'Departure',
     },
     {
-      title: 'Major',
+      ...MAJOR,
       value: state.listOfEducation[state.pageNumber].major,
       setValue: major => handleSetValue('major', major, setState),
-      type: 'text',
-      placeholder: 'Major',
     },
     {
-      title: 'Minor',
+      ...MINOR,
       value: state.listOfEducation[state.pageNumber].minor,
       setValue: minor => handleSetValue('minor', minor, setState),
-      type: 'text',
-      placeholder: 'Minor',
     },
     {
-      title: 'Grade',
+      ...GRADE,
       value: state.listOfEducation[state.pageNumber].grade,
       setValue: grade => handleSetValue('grade', grade, setState),
-      type: 'text',
-      placeholder: 'Grade',
     },
     {
-      title: 'Skills',
+      ...SKILLS,
       value: state.listOfEducation[state.pageNumber].skills,
       setValue: skills => handleSetValue('skills', skills, setState),
-      type: 'text',
-      placeholder: 'Skills',
     },
   ];
 

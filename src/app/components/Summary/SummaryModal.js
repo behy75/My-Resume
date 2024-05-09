@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useShowFullSummary } from '@/store';
 import DynamicModal from '../customs/DynamicModal';
+import { SUMMARY_INFORMATION_STATISTICS } from '@/app/utils';
+const { SUMMARY } = SUMMARY_INFORMATION_STATISTICS;
 
 export default function SummaryModal() {
   const { summary, setSummary } = useShowFullSummary(state => state);
@@ -11,17 +13,13 @@ export default function SummaryModal() {
 
   const summaryFields = [
     {
-      title: 'summary',
+      ...SUMMARY,
       value: state.summary,
       setValue: summary => setState(prevState => ({ ...prevState, summary })),
-      type: 'text_area',
-      placeholder: 'summary',
     },
   ];
 
-  const onSubmit = () => {
-    setSummary({ ...state });
-  };
+  const onSubmit = () => setSummary({ ...state });
 
   return (
     <DynamicModal title="Summary" fields={summaryFields} onSubmit={onSubmit} />

@@ -6,6 +6,17 @@ import {
   handleSelectPage,
   handleSetValue,
 } from './ExperiencesActions';
+import { EXPERIENCES_STATISTICS } from '@/app/utils';
+const {
+  SELECT_PAGE,
+  REMOVE_PAGE,
+  ROLE,
+  WEBSITE_URL,
+  ARRIVAL_DATE,
+  DEPARTURE_DATE,
+  NAME_OF_COMPANY,
+  ACTIVITIES,
+} = EXPERIENCES_STATISTICS;
 
 export default function ExperiencesModal() {
   const { experiences, setExperiences } = useExperience(state => state);
@@ -16,68 +27,52 @@ export default function ExperiencesModal() {
 
   const experiencesFields = [
     {
-      title: 'Select Page',
+      ...SELECT_PAGE,
       value: {
         pageNumber: state.pageNumber,
         lengthOfPages: state.listOfExperiences.length,
       },
       setValue: val => handleSelectPage(val, setState),
-      type: 'select_page',
-      placeholder: 'Select Page',
     },
     {
-      title: 'Remove',
+      ...REMOVE_PAGE,
       value: state.listOfExperiences.length,
       setValue: () => handleRemovePage(state, setState),
-      type: 'button',
-      placeholder: 'Remove Page',
     },
     {
-      title: 'Role',
+      ...ROLE,
       value: state.listOfExperiences[state.pageNumber].role,
       setValue: role => handleSetValue('role', role, setState),
-      type: 'text',
-      placeholder: 'Role',
     },
     {
-      title: 'Website URL',
+      ...WEBSITE_URL,
       value: state.listOfExperiences[state.pageNumber].websiteURL,
       setValue: websiteURL =>
         handleSetValue('websiteURL', websiteURL, setState),
-      type: 'text',
-      placeholder: 'Website URL',
     },
     {
-      title: 'Arrival Date',
+      ...ARRIVAL_DATE,
       value: state.listOfExperiences[state.pageNumber].arrivalDate,
       setValue: arrivalDate =>
         handleSetValue('arrivalDate', arrivalDate, setState),
-      type: 'date_picker',
-      placeholder: 'Arrival',
     },
     {
-      title: 'Departure Date',
+      ...DEPARTURE_DATE,
       value: state.listOfExperiences[state.pageNumber].departureDate,
       setValue: departureDate =>
         handleSetValue('departureDate', departureDate, setState),
-      type: 'date_picker',
-      placeholder: 'Departure',
     },
     {
-      title: 'Name of Company',
+      ...NAME_OF_COMPANY,
       value: state.listOfExperiences[state.pageNumber].nameOfCompany,
       setValue: nameOfCompany =>
         handleSetValue('nameOfCompany', nameOfCompany, setState),
-      type: 'text',
-      placeholder: 'Name of Company',
     },
     {
-      title: 'Activities',
+      ...ACTIVITIES,
       value: state.listOfExperiences[state.pageNumber].activities.join('\n'),
       setValue: activities =>
         handleSetValue('activities', activities, setState),
-      type: 'text_area',
-      placeholder: 'Activities',
     },
   ];
 

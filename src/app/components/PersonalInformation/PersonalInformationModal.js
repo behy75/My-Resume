@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { usePersonalInformation } from '@/store/usePersonalInformation';
 import DynamicModal from '../customs/DynamicModal';
+import { PERSONAL_INFORMATION_STATISTICS } from '@/app/utils';
+const { FIRST_NAME, LAST_NAME, POSITION, ADDRESS, STACK } =
+  PERSONAL_INFORMATION_STATISTICS;
 
 function PersonalInformationModal() {
   const {
@@ -21,43 +24,33 @@ function PersonalInformationModal() {
 
   const personalInformationFields = [
     {
-      title: 'First name',
+      ...FIRST_NAME,
       value: state.firstName,
       setValue: firstName =>
         setState(prevState => ({ ...prevState, firstName })),
-      type: 'text',
-      placeholder: 'Behnam',
     },
     {
-      title: 'Last name',
+      ...LAST_NAME,
       value: state.lastName,
       setValue: lastName => setState(prevState => ({ ...prevState, lastName })),
-      type: 'text',
-      placeholder: 'Ebrahimy',
     },
     {
-      title: 'Position',
+      ...POSITION,
       value: state.position,
       setValue: position => setState(prevState => ({ ...prevState, position })),
-      type: 'text',
-      placeholder: 'Senior Front-End Developer',
     },
     {
-      title: 'Address',
+      ...ADDRESS,
       value: state.address,
       setValue: address => setState(prevState => ({ ...prevState, address })),
-      type: 'text',
-      placeholder: 'Tehran, Iran',
     },
     {
-      title: 'Stack',
+      ...STACK,
       value: state.stack,
       setValue: stack => setState(prevState => ({ ...prevState, stack })),
-      type: 'text',
-      placeholder: 'JS',
     },
   ];
-
+  console.log(FIRST_NAME);
   const onSubmit = () => {
     setPersonalInformation({ ...state });
   };
