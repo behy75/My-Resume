@@ -9,7 +9,7 @@ export default function Skills() {
 
   return (
     <section className="relative pb-6 mt-0 mb-4 border-b-4 border-gray-300 first:mt-0 break-inside-avoid">
-      {!isPrintMode && <SkillsModal title="Education" />}
+      {!isPrintMode && <SkillsModal title="Skills" />}
       {/* To keep in the same column */}
       <section className="break-inside-avoid">
         <h2 className="mb-2 text-lg font-bold tracking-widest text-gray-700 print:font-normal">

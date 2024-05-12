@@ -20,7 +20,7 @@ const {
   SKILLS,
 } = EDUCATION_STATISTICS;
 
-function EducationModal() {
+function EducationModal({ title }) {
   const { colleges, setColleges } = useEducation(state => state);
 
   const [state, setState] = useState({
@@ -90,11 +90,7 @@ function EducationModal() {
   const onSubmit = () => setColleges([...state.listOfEducation]);
 
   return (
-    <DynamicModal
-      title="Education Information"
-      fields={educationFields}
-      onSubmit={onSubmit}
-    />
+    <DynamicModal title={title} fields={educationFields} onSubmit={onSubmit} />
   );
 }
 

@@ -5,8 +5,7 @@ import { CONTACT_INFORMATION_STATISTICS } from '@/app/utils';
 const { WEBSITE_URL, LINKEDIN, GITHUB, EMAIL, PHONE } =
   CONTACT_INFORMATION_STATISTICS;
 
-function SocialNetWorkModal(props) {
-  const { title } = props;
+function SocialNetWorkModal({ title }) {
   const { webSite, linkedin, gitHub, email, phone, setContactInformation } =
     useContactInformation(state => state);
   const [state, setState] = useState({

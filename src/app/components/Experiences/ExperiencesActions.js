@@ -10,7 +10,7 @@ export const handleSelectPage = (val, setState) => {
           websiteURL: '',
           arrivalDate: '',
           departureDate: '',
-          toDoList: [],
+          activities: [],
         },
       ],
       pageNumber: prevState.listOfExperiences.length,

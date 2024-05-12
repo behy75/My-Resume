@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import DropDownSymbol from '../Common/DropDownSymbol';
+import { AnimatePresence, motion } from 'framer-motion';
 import { usePrintModeStore } from '@/store';
+import DropDownSymbol from '../Common/DropDownSymbol';
+import { experiencesVariants } from '../Common/FramerMotionVariants';
 
 export default function Experience(props) {
   const {
@@ -47,20 +49,27 @@ export default function Experience(props) {
           {arrivalDate} &ndash; {departureDate} | {nameOfCompany}
         </p>
       </header>
-
-      {open && (
-        <ul className="mt-2 list-disc list-inside text-gray-800 text-md">
-          {activities.map((activity, index) => (
-            <>
-              {!!activity && (
-                <li key={index} className="pt-1 text-justify">
-                  {activity}
-                </li>
-              )}
-            </>
-          ))}
-        </ul>
-      )}
+      <AnimatePresence>
+        {open && (
+          <motion.ul
+            variants={experiencesVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="mt-2 list-disc list-inside text-gray-800 text-md"
+          >
+            {activities.map((activity, index) => (
+              <>
+                {!!activity && (
+                  <li key={index} className="pt-1 text-justify">
+                    {activity}
+                  </li>
+                )}
+              </>
+            ))}
+          </motion.ul>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

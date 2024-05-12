@@ -4,7 +4,7 @@ import DynamicModal from '../Common/DynamicModal';
 import { SKILLS_INFORMATION_STATISTICS } from '@/app/utils';
 const { ADD_SKILL } = SKILLS_INFORMATION_STATISTICS;
 
-export default function SkillsModal() {
+export default function SkillsModal({ title }) {
   const { skills, setSkills } = useSkills(state => state);
 
   const [state, setState] = useState([...skills]);
@@ -21,14 +21,15 @@ export default function SkillsModal() {
 
   return (
     <DynamicModal
-      title="Skills"
+      title={title}
       fields={skillsFields}
       items={state.map(item => ({
         name: item,
-        removeItem: id =>
-          setState(preState =>
-            preState.filter((preState, index) => index !== id)
-          ),
+        removeItem: id => {
+          setState(prevState =>
+            prevState.filter((currentItem, index) => index !== id)
+          );
+        },
       }))}
       onSubmit={onSubmit}
     />

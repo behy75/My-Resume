@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import PersonalInformationModal from './PersonalInformationModal';
 import { usePersonalInformation } from '@/store/usePersonalInformation';
 import { usePrintModeStore } from '@/store';
@@ -32,8 +33,11 @@ export default function PersonalInformation() {
         </h3>
       </section>
       {/* Initials Block */}
-      <section
-        className="justify-between px-3 mt-0 mb-5 text-4xl font-black leading-none text-white bg-gray-700 initials-container print:bg-black"
+      <motion.section
+        drag
+        dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
+        dragElastic={1}
+        className="justify-between px-3 mt-0 mb-5 text-4xl font-black leading-none text-white bg-gray-700 initials-container print:bg-black z-100"
         style={{ paddingBottom: '1.5rem', paddingTop: '1.5rem' }}
       >
         {stackArray.map((stackArr, index) => (
@@ -41,7 +45,7 @@ export default function PersonalInformation() {
             {stackArr}
           </section>
         ))}
-      </section>
+      </motion.section>
     </header>
   );
 }

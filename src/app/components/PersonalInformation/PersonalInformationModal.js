@@ -5,7 +5,7 @@ import { PERSONAL_INFORMATION_STATISTICS } from '@/app/utils';
 const { FIRST_NAME, LAST_NAME, POSITION, ADDRESS, STACK } =
   PERSONAL_INFORMATION_STATISTICS;
 
-function PersonalInformationModal() {
+function PersonalInformationModal({ title }) {
   const {
     firstName,
     lastName,
@@ -55,7 +55,7 @@ function PersonalInformationModal() {
 
   return (
     <DynamicModal
-      title="Personal Information"
+      title={title}
       fields={personalInformationFields}
       onSubmit={onSubmit}
     />

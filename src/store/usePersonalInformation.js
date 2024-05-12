@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import IndividualProfile from '../app/Individual_profile.json';
+import IndividualProfile from '../../db.json';
 const personalDetails = IndividualProfile.personal_details;
 const { first_name, last_name, role, address, stack } = personalDetails;
 

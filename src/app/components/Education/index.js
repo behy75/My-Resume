@@ -10,7 +10,7 @@ export default function Education() {
 
   return (
     <section className="relative pb-0 mt-2 border-b-4 border-gray-300 first:mt-0 break-inside-avoid">
-      {!isPrintMode && <EducationModal title="Education" />}
+      {!isPrintMode && <EducationModal title="Education Information" />}
       {/* To keep in the same column */}
       <section className="break-inside-avoid">
         <h2 className="mb-2 text-lg font-bold tracking-widest text-gray-700 print:font-normal">

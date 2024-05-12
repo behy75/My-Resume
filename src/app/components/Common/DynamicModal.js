@@ -1,36 +1,79 @@
 import React, { useState } from 'react';
+import { AnimatePresence, motion, useCycle } from 'framer-motion';
 import FieldControls from './FieldControls';
+import {
+  dynamicModalVariants,
+  inputsVariants,
+  skillsVariants,
+} from './FramerMotionVariants';
+
+const Path = props => (
+  <motion.path
+    fill="transparent"
+    strokeWidth="3"
+    stroke="hsl(0, 0%, 18%)"
+    strokeLinecap="round"
+    {...props}
+  />
+);
 
 // Higher Order Component to render a modal with dynamic input fields
 const withDynamicModal = WrappedComponent => {
   return function DynamicModal({ ...rest }) {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, toggleOpen] = useCycle(false, true);
+    const [clickOrigin, setClickOrigin] = useState({ x: 0, y: 0 });
+
     const bottomPosition = rest.title.includes('Social')
       ? 'bottom-6'
       : 'bottom-1';
-    const toggleModal = event => {
-      setIsOpen(!isOpen);
+
+    const toggleModal = () => {
+      toggleOpen(!isOpen);
+    };
+
+    const handleOpenModal = event => {
+      setClickOrigin({ x: event.clientX, y: event.clientY });
+      toggleOpen(!isOpen);
     };
 
     return (
-      <div className={`absolute right-0 ${bottomPosition}`}>
-        <button
-          onClick={toggleModal}
-          data-modal-target="default-modal"
-          data-modal-toggle="default-modal"
-          className="right-10 text-xs text-white text-white bg-white font-medium rounded-lg text-sm p-2 text-center border-2"
-          type="button"
-        ></button>
-
-        <div
-          id="default-modal"
-          className={`fixed inset-0 z-50 overflow-y-auto items-center justify-center ${
-            isOpen ? 'flex' : 'hidden'
-          }`}
+      <AnimatePresence>
+        <motion.div
+          initial={false}
+          animate={isOpen ? 'visible' : 'hidden'}
+          className={`absolute right-0 ${bottomPosition}`}
         >
-          <WrappedComponent toggleModal={toggleModal} {...rest} />
-        </div>
-      </div>
+          <button className="relative" onClick={handleOpenModal}>
+            <svg width="15" height="15" viewBox="0 0 20 20">
+              <Path
+                variants={{
+                  visible: { d: 'M 3 16.5 L 17 2.5' },
+                  hidden: { d: 'M 2 2.5 L 20 2.5' },
+                }}
+              />
+              <Path
+                variants={{
+                  visible: { d: 'M 3 2.5 L 17 16.346' },
+                  hidden: { d: 'M 2 16.346 L 20 16.346' },
+                }}
+              />
+            </svg>
+          </button>
+
+          {isOpen && (
+            <motion.div
+              variants={dynamicModalVariants(clickOrigin)}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              id="default-modal"
+              className="fixed inset-0 z-50 overflow-y-auto items-center justify-center flex"
+            >
+              <WrappedComponent toggleModal={toggleModal} {...rest} />
+            </motion.div>
+          )}
+        </motion.div>
+      </AnimatePresence>
     );
   };
 };
@@ -49,8 +92,12 @@ function ModalContent({
   };
 
   return (
-    <div className="relative p-4 w-full max-w-4xl max-h-full">
-      <div className="relative rounded-lg shadow bg-gray-700">
+    <div className="relative p-4 w-full max-w-5xl max-h-full">
+      <motion.div
+        drag
+        dragConstraints={{ left: -500, right: 500, top: -250, bottom: 250 }}
+        className="relative rounded-lg shadow bg-gray-700"
+      >
         <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t border-gray-600">
           <h3 className="text-xl font-semibold text-white">{title}</h3>
           <button
@@ -79,31 +126,37 @@ function ModalContent({
         </div>
         <div className="p-4 md:p-5 space-y-4 text-white">
           <form>
-            <div className="grid gap-6 mb-6 md:grid-cols-6">
-              {items.map((item, index) => (
-                <div
-                  onClick={() => item.removeItem(index)}
-                  key={index}
-                  className="relative flex justify-center items-center"
-                >
-                  <div className="pr-1">
-                    <svg
-                      className="text-gray-400 dark:text-gray-500 w-5 h-5"
-                      aria-hidden="true"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                        clip-rule="evenodd"
-                      ></path>
-                    </svg>
-                  </div>
-                  {item.name}
-                </div>
-              ))}
+            <div className="grid gap-6 mb-6 md:grid-cols-6 justify-items-start">
+              <AnimatePresence mode={'sync'}>
+                {items.map((item, index) => (
+                  <motion.div
+                    variants={skillsVariants}
+                    animate="visible"
+                    exit="exit"
+                    whileHover="hover"
+                    onClick={() => item.removeItem(index)}
+                    key={index}
+                    className="relative flex justify-center items-center"
+                  >
+                    <div className="pr-1">
+                      <svg
+                        className="text-gray-400 dark:text-gray-500 w-5 h-5"
+                        aria-hidden="true"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                          clip-rule="evenodd"
+                        ></path>
+                      </svg>
+                    </div>
+                    {item.name}
+                  </motion.div>
+                ))}
+              </AnimatePresence>
             </div>
             <div className="grid gap-6 mb-6 md:grid-cols-2">
               {fields.map((field, index) => (
@@ -139,7 +192,7 @@ function ModalContent({
             Save
           </button>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

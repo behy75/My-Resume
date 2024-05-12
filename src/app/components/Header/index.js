@@ -1,16 +1,16 @@
 import React from 'react';
 import { useReactToPrint } from 'react-to-print';
 import { usePrintModeStore } from '@/store';
-import IndividualProfile from '../../Individual_profile.json';
-const personalDetails = IndividualProfile.personal_details;
+import { usePersonalInformation } from '@/store/usePersonalInformation';
 
 export default function Header(props) {
-  const { containerRef } = props;
+  const { firstName } = usePersonalInformation(state => state);
   const { setIsPrintMode } = usePrintModeStore(state => state);
+  const { containerRef } = props;
 
   const handleReactToPrint = useReactToPrint({
     content: () => containerRef?.current,
-    documentTitle: personalDetails.name,
+    documentTitle: firstName,
     copyStyles: true,
   });
 
@@ -18,10 +18,10 @@ export default function Header(props) {
     setIsPrintMode(true);
     setTimeout(() => {
       handleReactToPrint();
-    }, 100);
+    }, 600);
     setTimeout(() => {
       setIsPrintMode(false);
-    }, 200);
+    }, 700);
   };
 
   return (

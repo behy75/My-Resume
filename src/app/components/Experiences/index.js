@@ -9,7 +9,7 @@ export default function Experiences() {
   const { experiences } = useExperience(state => state);
   return (
     <section className="relative pb-2 pb-4 mt-4 border-b-4 border-gray-300 first:mt-0">
-      {!isPrintMode && <ExperiencesModal title="Experiences" />}
+      {!isPrintMode && <ExperiencesModal title="Experiences Information" />}
 
       {/* To keep in the same column */}
       <section className="break-inside-avoid">

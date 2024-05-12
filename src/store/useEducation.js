@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import IndividualProfile from '../app/Individual_profile.json';
+import IndividualProfile from '../../db.json';
 const { colleges } = IndividualProfile;
 
 export const useEducation = create(set => ({

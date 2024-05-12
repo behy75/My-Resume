@@ -18,7 +18,7 @@ const {
   ACTIVITIES,
 } = EXPERIENCES_STATISTICS;
 
-export default function ExperiencesModal() {
+export default function ExperiencesModal({ title }) {
   const { experiences, setExperiences } = useExperience(state => state);
   const [state, setState] = useState({
     listOfExperiences: [...experiences],
@@ -80,7 +80,7 @@ export default function ExperiencesModal() {
 
   return (
     <DynamicModal
-      title="Experiences Information"
+      title={title}
       fields={experiencesFields}
       onSubmit={onSubmit}
     />

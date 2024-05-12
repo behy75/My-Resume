@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import IndividualProfile from '../app/Individual_profile.json';
+import IndividualProfile from '../../db.json';
 
 export const usePrintModeStore = create(set => ({
   isPrintMode: false,
