@@ -1,6 +1,6 @@
 import { create } from 'zustand';
-import IndividualProfile from '../../db.json';
-const { colleges } = IndividualProfile;
+import DB from '../../DB.json';
+const { colleges } = DB;
 
 export const useEducation = create(set => ({
   colleges,

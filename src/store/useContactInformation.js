@@ -1,6 +1,6 @@
 import { create } from 'zustand';
-import IndividualProfile from '../../db.json';
-const socialNetworks = IndividualProfile.social_networks;
+import DB from '../../DB.json';
+const socialNetworks = DB.social_networks;
 
 function findSocialNetworks(name) {
   return socialNetworks.find(socialNetwork =>

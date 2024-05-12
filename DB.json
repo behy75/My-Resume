@@ -9,26 +9,31 @@
   },
   "social_networks": [
     {
+      "id": 1,
       "name": "Linkedin",
       "link": "https://linkedin.com/in/behnam-ebrahimy",
       "displayName": "Behnam Ebrahimy"
     },
     {
+      "id": 2,
       "name": "Git Hub",
       "link": "https://github.com/behy75",
       "displayName": "Behnam Ebrahimy"
     },
     {
+      "id": 3,
       "name": "Email",
       "link": "mailto:bebrahimy19@gmail.com",
       "displayName": "Bebrahimy19@gmail.com"
     },
     {
+      "id": 4,
       "name": "Phone",
       "link": "tel:+989186393984",
       "displayName": "+98(918)6393984"
     },
     {
+      "id": 5,
       "name": "Website URL",
       "link": "",
       "displayName": ""
@@ -37,6 +42,7 @@
   "summary": "As a front-end developer, I bring over 5 years of expertise in React JS development. I have a strong track record of seamlessly collaborating with diverse teams, whether in small or larger groups of up to 10 members. With valuable contributions to over 5 projects, I consistently deliver top-notch solutions. My commitment to promoting teamwork and innovation, allows me to excel in vibrant environments where collaboration is paramount.",
   "colleges": [
     {
+      "id": 1,
       "nameOfCollege": "University Of Tehran",
       "arrivalDate": "Nov 2020",
       "departureDate": "Feb 2024",
@@ -47,6 +53,7 @@
       "skills": ["Research", "Analysis", "Critical Thinking", "Communication"]
     },
     {
+      "id": 2,
       "nameOfCollege": "Isfahan University Of Technology",
       "arrivalDate": "Jan 2015",
       "departureDate": "May 2019",
@@ -91,6 +98,7 @@
   ],
   "experiences": [
     {
+      "id": 1,
       "role": "Senior Front-End Developer",
       "websiteURL": "https://www.workmap.ai/",
       "arrivalDate": "Jan 2022",
@@ -104,6 +112,7 @@
       ]
     },
     {
+      "id": 2,
       "role": "Senior Front-End Developer",
       "websiteURL": "https://nireeka.com/",
       "arrivalDate": "Sep 2021",
@@ -119,6 +128,7 @@
       ]
     },
     {
+      "id": 3,
       "role": "Front-End Developer",
       "arrivalDate": "Aug 2019",
       "departureDate": "May 2021",
@@ -133,6 +143,7 @@
       ]
     },
     {
+      "id": 4,
       "role": "Junior Front-End Developer",
       "arrivalDate": "Feb 2018",
       "departureDate": "Aug 2019",

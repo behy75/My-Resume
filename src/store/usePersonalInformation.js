@@ -1,6 +1,6 @@
 import { create } from 'zustand';
-import IndividualProfile from '../../db.json';
-const personalDetails = IndividualProfile.personal_details;
+import DB from '../../DB.json';
+const personalDetails = DB.personal_details;
 const { first_name, last_name, role, address, stack } = personalDetails;
 
 export const usePersonalInformation = create(set => ({

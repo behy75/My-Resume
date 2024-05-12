@@ -1,6 +1,6 @@
 import { create } from 'zustand';
-import IndividualProfile from '../../db.json';
-const { experiences } = IndividualProfile;
+import DB from '../../DB.json';
+const { experiences } = DB;
 
 export const useExperience = create(set => ({
   experiences,
