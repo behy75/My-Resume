@@ -1,5 +1,5 @@
 import React from 'react';
-import ResumeBuilder from './components/ResumeBuilder';
+import ResumeBuilder from '../app/components/ResumeBuilder';
 
 export default function Resume() {
   return (

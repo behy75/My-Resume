@@ -17,7 +17,7 @@ export default function Education() {
           EDUCATION
         </h2>
         {colleges.map((college, index) => (
-          <>
+          <div key={index}>
             <School
               nameOfCollege={college.nameOfCollege}
               arrivalDate={college.arrivalDate}
@@ -28,7 +28,7 @@ export default function Education() {
               minor={college.minor}
               skills={college.skills}
             />
-          </>
+          </div>
         ))}
       </section>
     </section>

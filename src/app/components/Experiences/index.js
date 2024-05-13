@@ -17,8 +17,8 @@ export default function Experiences() {
           EXPERIENCE
         </h2>
         {/* Jobs */}
-        {experiences.map(experience => (
-          <>
+        {experiences.map((experience, index) => (
+          <div key={index}>
             <Experience
               role={experience.role}
               websiteURL={experience.websiteURL}
@@ -27,7 +27,7 @@ export default function Experiences() {
               nameOfCompany={experience.nameOfCompany}
               activities={experience.activities}
             />
-          </>
+          </div>
         ))}
       </section>
     </section>

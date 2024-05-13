@@ -40,10 +40,10 @@ export default function School(props) {
         <li>
           <span className="font-semibold text-md">Skills: </span>
           {skills.map((skill, skillIndex) => (
-            <>
+            <div key={skillIndex}>
               {skill}
               {skills.length > skillIndex + 1 ? ', ' : '.'}
-            </>
+            </div>
           ))}
         </li>
       </ul>

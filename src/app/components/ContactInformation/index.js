@@ -19,7 +19,7 @@ export default function ContactInformation() {
         <section className="pb-4 mb-2 border-b-4 border-gray-300 break-inside-avoid">
           <ul className="pr-7 list-inside">
             {socialNetworks.map((socialNetwork, index) => (
-              <>
+              <div key={index}>
                 {socialNetwork.name &&
                   socialNetwork.link &&
                   socialNetwork.displayName && (
@@ -29,7 +29,7 @@ export default function ContactInformation() {
                       displayName={socialNetwork.displayName}
                     />
                   )}
-              </>
+              </div>
             ))}
           </ul>
         </section>
