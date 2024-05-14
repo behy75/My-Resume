@@ -1,55 +1,80 @@
-import React, { useState } from 'react';
-import { useContactInformation } from '@/store/useContactInformation';
+import React, { useEffect, useState } from 'react';
 import DynamicModal from '../Common/DynamicModal';
 import { CONTACT_INFORMATION_STATISTICS } from '@/app/utils';
+import { useQueryClient } from 'react-query';
+import { useUpdateData } from '@/app/hooks/useUpdateData';
 const { WEBSITE_URL, LINKEDIN, GITHUB, EMAIL, PHONE } =
   CONTACT_INFORMATION_STATISTICS;
 
+function findSocialNetworks(socialNetworks, name) {
+  return socialNetworks.find(socialNetwork =>
+    socialNetwork.name.toLowerCase().includes(name)
+  );
+}
+
 function SocialNetWorkModal({ title }) {
-  const { webSite, linkedin, gitHub, email, phone, setContactInformation } =
-    useContactInformation(state => state);
+  const { mutate: setContactInformation } = useUpdateData();
+  const queryClient = useQueryClient();
+  const socialNetworks = queryClient.getQueryData('social_networks') || [];
+
   const [state, setState] = useState({
-    webSite,
-    linkedin,
-    gitHub,
-    email,
-    phone,
+    webSite: { ...findSocialNetworks(socialNetworks, 'website') },
+    linkedin: { ...findSocialNetworks(socialNetworks, 'linkedin') },
+    gitHub: { ...findSocialNetworks(socialNetworks, 'git hub') },
+    email: { ...findSocialNetworks(socialNetworks, 'email') },
+    phone: { ...findSocialNetworks(socialNetworks, 'phone') },
   });
 
   const SocialNetWorkFields = [
     {
       ...WEBSITE_URL,
-      value: webSite.link,
-      displayName: webSite.displayName,
+      value: state.webSite.link,
+      displayName: state.webSite.displayName,
       setValue: webSite => setState(prevState => ({ ...prevState, webSite })),
     },
     {
       ...LINKEDIN,
-      value: linkedin.link,
-      displayName: linkedin.displayName,
+      value: state.linkedin.link,
+      displayName: state.linkedin.displayName,
       setValue: linkedin => setState(prevState => ({ ...prevState, linkedin })),
     },
     {
       ...GITHUB,
-      value: gitHub.link,
-      displayName: gitHub.displayName,
+      value: state.gitHub.link,
+      displayName: state.gitHub.displayName,
       setValue: gitHub => setState(prevState => ({ ...prevState, gitHub })),
     },
     {
       ...EMAIL,
-      value: email.link,
-      displayName: email.displayName,
+      value: state.email.link,
+      displayName: state.email.displayName,
       setValue: email => setState(prevState => ({ ...prevState, email })),
     },
     {
       ...PHONE,
-      value: phone.link,
-      displayName: phone.displayName,
+      value: state.phone.link,
+      displayName: state.phone.displayName,
       setValue: phone => setState(prevState => ({ ...prevState, phone })),
     },
   ];
 
-  const onSubmit = () => setContactInformation({ ...state });
+  const onSubmit = () =>
+    setContactInformation({
+      targetDataName: 'experiences',
+      updatedData: [...state],
+    });
+
+  useEffect(
+    () =>
+      setState(prevState => ({
+        webSite: { ...findSocialNetworks(socialNetworks, 'website') },
+        linkedin: { ...findSocialNetworks(socialNetworks, 'linkedin') },
+        gitHub: { ...findSocialNetworks(socialNetworks, 'git hub') },
+        email: { ...findSocialNetworks(socialNetworks, 'email') },
+        phone: { ...findSocialNetworks(socialNetworks, 'phone') },
+      })),
+    [state]
+  );
 
   return (
     <DynamicModal

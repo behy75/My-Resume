@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
-import { usePersonalInformation } from '@/store/usePersonalInformation';
 import DynamicModal from '../Common/DynamicModal';
 import { PERSONAL_INFORMATION_STATISTICS } from '@/app/utils';
+import { useQueryClient } from 'react-query';
+import { useUpdateData } from '@/app/hooks/useUpdateData';
 const { FIRST_NAME, LAST_NAME, POSITION, ADDRESS, STACK } =
   PERSONAL_INFORMATION_STATISTICS;
 
 function PersonalInformationModal({ title }) {
+  const { mutate: setPersonalInformation } = useUpdateData();
+  const queryClient = useQueryClient();
+  const personalInformation = queryClient.getQueryData('personal_details');
   const {
-    firstName,
-    lastName,
-    position,
     address,
-    stack,
-    setPersonalInformation,
-  } = usePersonalInformation(state => state);
+    first_name: firstName,
+    last_name: lastName,
+    role: position,
+    stack = '',
+  } = personalInformation;
   const [state, setState] = useState({
     firstName,
     lastName,
@@ -51,7 +54,19 @@ function PersonalInformationModal({ title }) {
     },
   ];
 
-  const onSubmit = () => setPersonalInformation({ ...state });
+  const onSubmit = () => {
+    const updatedData = {
+      address: state.address,
+      first_name: state.firstName,
+      last_name: state.lastName,
+      role: state.position,
+      stack: state.stack,
+    };
+    setPersonalInformation({
+      targetDataName: 'personal_details',
+      updatedData: { ...updatedData },
+    });
+  };
 
   return (
     <DynamicModal

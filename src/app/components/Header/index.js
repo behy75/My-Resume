@@ -1,16 +1,17 @@
 import React from 'react';
 import { useReactToPrint } from 'react-to-print';
+import { useQueryClient } from 'react-query';
 import { usePrintModeStore } from '@/store';
-import { usePersonalInformation } from '@/store/usePersonalInformation';
 
 export default function Header(props) {
-  const { firstName } = usePersonalInformation(state => state);
+  const queryClient = useQueryClient();
+  const personalInformation = queryClient.getQueryData('personal_details');
   const { setIsPrintMode } = usePrintModeStore(state => state);
   const { containerRef } = props;
 
   const handleReactToPrint = useReactToPrint({
     content: () => containerRef?.current,
-    documentTitle: firstName,
+    documentTitle: personalInformation?.firstName || '',
     copyStyles: true,
   });
 

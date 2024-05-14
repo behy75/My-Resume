@@ -1,10 +1,9 @@
 {
   "personal_details": {
+    "address": "Tehran, Iran",
     "first_name": "Behnam",
     "last_name": "Ebrahimy",
     "role": "Senior Front-End Developer",
-    "web_site_url": "",
-    "address": "Tehran, Iran",
     "stack": "JS"
   },
   "social_networks": [
@@ -39,7 +38,7 @@
       "displayName": ""
     }
   ],
-  "summary":  "As a front-end developer, I bring over 5 years of expertise in React JS development. I have a strong track record of seamlessly collaborating with diverse teams, whether in small or larger groups of up to 10 members. With valuable contributions to over 5 projects, I consistently deliver top-notch solutions. My commitment to promoting teamwork and innovation, allows me to excel in vibrant environments where collaboration is paramount.",
+  "summary": "As a front-end developer, I bring over 5 years of expertise in React JS development. I have a strong track record of seamlessly collaborating with diverse teams, whether in small or larger groups of up to 10 members. With valuable contributions to over 5 projects, I consistently deliver top-notch solutions. My commitment to promoting teamwork and innovation, allows me to excel in vibrant environments where collaboration is paramount.",
   "colleges": [
     {
       "id": "1",

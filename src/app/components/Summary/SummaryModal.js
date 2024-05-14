@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import { useQueryClient } from 'react-query';
-// import { useShowFullSummary } from '@/store';
 import DynamicModal from '../Common/DynamicModal';
-import { useUpdateData } from '@/app/hooks/useFetchData';
 import { SUMMARY_INFORMATION_STATISTICS } from '@/app/utils';
+import { useUpdateData } from '@/app/hooks/useUpdateData';
 const { SUMMARY } = SUMMARY_INFORMATION_STATISTICS;
 
 export default function SummaryModal() {
   const queryClient = useQueryClient();
   const summary = queryClient.getQueryData('summary');
-  // const { setSummary } = useShowFullSummary(state => state);
   const { mutate: setSummary } = useUpdateData();
 
   const [state, setState] = useState({

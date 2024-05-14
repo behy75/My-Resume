@@ -1,20 +1,32 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { motion } from 'framer-motion';
-import PersonalInformationModal from './PersonalInformationModal';
-import { usePersonalInformation } from '@/store/usePersonalInformation';
 import { usePrintModeStore } from '@/store';
+import { useFetchData } from '@/app/hooks/useFetchData';
+import PersonalInformationModal from './PersonalInformationModal';
+import LoadingAndError from '../Common/LoadingAndError';
 
-export default function PersonalInformation() {
-  const { isPrintMode } = usePrintModeStore(state => state);
-  const { firstName, lastName, position, address, stack } =
-    usePersonalInformation(state => state);
+function DisplaySection({
+  firstName,
+  lastName,
+  position,
+  address,
+  stack,
+  isLoading,
+  error,
+  isError,
+}) {
   const stackArray = stack.split(' ');
 
+  if (isLoading) {
+    return <LoadingAndError title="Personal Information" isError={false} />;
+  }
+
+  if (isError) {
+    return <LoadingAndError title={error.message} isError={isError} />;
+  }
+
   return (
-    <header className="relative inline-flex justify-between items-baseline mb-2 w-full align-top border-b-4 border-gray-300">
-      {!isPrintMode && (
-        <PersonalInformationModal title="Personal Information" />
-      )}
+    <>
       <section className="block">
         <h1
           // onMouseEnter={() => setShouldShowCursor(true)}
@@ -46,6 +58,47 @@ export default function PersonalInformation() {
           </section>
         ))}
       </motion.section>
+    </>
+  );
+}
+
+export default function PersonalInformation() {
+  const { isPrintMode } = usePrintModeStore(state => state);
+  const {
+    data: personalInformation = '',
+    isLoading,
+    error,
+    isError,
+    isFetching,
+    refetch,
+  } = useFetchData('personal_details');
+  const {
+    address,
+    first_name: firstName,
+    last_name: lastName,
+    role: position,
+    stack = '',
+  } = personalInformation;
+
+  const showPersonalInformationModal = useMemo(() => {
+    return !isError && !isLoading && !isPrintMode;
+  }, [personalInformation, isPrintMode]);
+
+  return (
+    <header className="relative inline-flex justify-between items-baseline mb-2 w-full align-top border-b-4 border-gray-300">
+      {showPersonalInformationModal && (
+        <PersonalInformationModal title="Personal Information" />
+      )}
+      <DisplaySection
+        firstName={firstName}
+        lastName={lastName}
+        position={position}
+        address={address}
+        stack={stack}
+        isLoading={isLoading}
+        error={error}
+        isError={isError}
+      />
     </header>
   );
 }

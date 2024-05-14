@@ -18,7 +18,7 @@ function modifySummary(summary) {
   return newArray;
 }
 
-function DisPlaySection({
+function DisplaySection({
   summary,
   isPrintMode,
   showFullSummary,
@@ -26,6 +26,9 @@ function DisPlaySection({
   error,
   isError,
 }) {
+  const showSummary = useMemo(() => {
+    return !isError && !isLoading && !isPrintMode;
+  }, [showFullSummary, isPrintMode]);
   const newArray = modifySummary(summary);
 
   if (isLoading) {
@@ -39,7 +42,7 @@ function DisPlaySection({
   return (
     <section className="mb-2 break-inside-avoid">
       <p className="mt-2 leading-normal text-gray-700 text-md text-justify">
-        {!isPrintMode && !showFullSummary ? (
+        {showSummary ? (
           <Typical steps={newArray} loop={Infinity} wrapper="a" />
         ) : (
           summary
@@ -92,7 +95,7 @@ export default function Summary() {
           )}
         </div>
 
-        <DisPlaySection
+        <DisplaySection
           summary={summary}
           isPrintMode={isPrintMode}
           showFullSummary={showFullSummary}

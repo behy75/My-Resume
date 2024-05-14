@@ -37,7 +37,7 @@ export default function School(props) {
             {grade}
           </li>
         )}
-        <li>
+        <li className="flex">
           <span className="font-semibold text-md">Skills: </span>
           {skills.map((skill, skillIndex) => (
             <div key={skillIndex}>

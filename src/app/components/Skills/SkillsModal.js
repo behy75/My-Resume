@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
-import { useSkills } from '@/store/useSkills';
+import React, { useEffect, useState } from 'react';
 import DynamicModal from '../Common/DynamicModal';
 import { SKILLS_INFORMATION_STATISTICS } from '@/app/utils';
+import { useQueryClient } from 'react-query';
+import { useUpdateData } from '@/app/hooks/useUpdateData';
 const { ADD_SKILL } = SKILLS_INFORMATION_STATISTICS;
 
 export default function SkillsModal({ title }) {
-  const { skills, setSkills } = useSkills(state => state);
-
+  const queryClient = useQueryClient();
+  const skills = queryClient.getQueryData('skills') || [];
+  const { mutate: setSkills } = useUpdateData();
   const [state, setState] = useState([...skills]);
+
+  useEffect(() => setState([...skills]), [skills]);
 
   const skillsFields = [
     {
@@ -17,7 +21,8 @@ export default function SkillsModal({ title }) {
     },
   ];
 
-  const onSubmit = () => setSkills([...state]);
+  const onSubmit = () =>
+    setSkills({ targetDataName: 'skills', updatedData: [...state] });
 
   return (
     <DynamicModal

@@ -1,28 +1,11 @@
-import { useQuery, useMutation } from 'react-query';
 import axios from 'axios';
+import { useQuery } from 'react-query';
 
 const baseURL = 'http://localhost:4000/';
 
 const fetchData = async targetDataName => {
   const response = await axios.get(`${baseURL}${targetDataName}`);
   return response.data;
-};
-
-const updateData = async data => {
-  try {
-    const response = await axios.patch(
-      `${baseURL}${data.targetDataName}`,
-      data.updatedData,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    );
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
 };
 
 export const useFetchData = targetDataName => {
@@ -61,8 +44,4 @@ export const useFetchData = targetDataName => {
     // A selector function that allows you to transform or select specific data from the query result.
     // By default, React Query will store the entire query result object, but you can use this option to store only the data you need.
   });
-};
-
-export const useUpdateData = () => {
-  return useMutation(updateData);
 };

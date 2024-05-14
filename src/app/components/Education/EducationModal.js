@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useEducation } from '@/store/useEducation';
+import React, { useEffect, useState } from 'react';
 import DynamicModal from '../Common/DynamicModal';
 import {
   handleRemovePage,
@@ -7,6 +6,8 @@ import {
   handleSetValue,
 } from './EducationActions';
 import { EDUCATION_STATISTICS } from '@/app/utils';
+import { useQueryClient } from 'react-query';
+import { useUpdateData } from '@/app/hooks/useUpdateData';
 const {
   SELECT_PAGE,
   REMOVE_PAGE,
@@ -21,10 +22,12 @@ const {
 } = EDUCATION_STATISTICS;
 
 function EducationModal({ title }) {
-  const { colleges, setColleges } = useEducation(state => state);
+  const { mutate: setColleges } = useUpdateData();
+  const queryClient = useQueryClient();
+  const colleges = queryClient.getQueryData('colleges') || [];
 
   const [state, setState] = useState({
-    listOfEducation: [...colleges],
+    listOfColleges: [...colleges],
     pageNumber: 0,
   });
 
@@ -33,61 +36,74 @@ function EducationModal({ title }) {
       ...SELECT_PAGE,
       value: {
         pageNumber: state.pageNumber,
-        lengthOfPages: state.listOfEducation.length,
+        lengthOfPages: state.listOfColleges.length,
       },
       setValue: val => handleSelectPage(val, setState),
     },
     {
       ...REMOVE_PAGE,
-      value: state.listOfEducation.length,
+      value: state.listOfColleges.length,
       setValue: () => handleRemovePage(state, setState),
     },
     {
       ...FIELD,
-      value: state.listOfEducation[state.pageNumber].field,
+      value: state.listOfColleges[state.pageNumber].field,
       setValue: field => handleSetValue('field', field, setState),
     },
     {
       ...NAME_OF_COLLEGE,
-      value: state.listOfEducation[state.pageNumber].nameOfCollege,
+      value: state.listOfColleges[state.pageNumber].nameOfCollege,
       setValue: nameOfCollege =>
         handleSetValue('nameOfCollege', nameOfCollege, setState),
     },
     {
       ...ARRIVAL_DATE,
-      value: state.listOfEducation[state.pageNumber].arrivalDate,
+      value: state.listOfColleges[state.pageNumber].arrivalDate,
       setValue: arrivalDate =>
         handleSetValue('arrivalDate', arrivalDate, setState),
     },
     {
       ...DEPARTURE_DATE,
-      value: state.listOfEducation[state.pageNumber].departureDate,
+      value: state.listOfColleges[state.pageNumber].departureDate,
       setValue: departureDate =>
         handleSetValue('departureDate', departureDate, setState),
     },
     {
       ...MAJOR,
-      value: state.listOfEducation[state.pageNumber].major,
+      value: state.listOfColleges[state.pageNumber].major,
       setValue: major => handleSetValue('major', major, setState),
     },
     {
       ...MINOR,
-      value: state.listOfEducation[state.pageNumber].minor,
+      value: state.listOfColleges[state.pageNumber].minor,
       setValue: minor => handleSetValue('minor', minor, setState),
     },
     {
       ...GRADE,
-      value: state.listOfEducation[state.pageNumber].grade,
+      value: state.listOfColleges[state.pageNumber].grade,
       setValue: grade => handleSetValue('grade', grade, setState),
     },
     {
       ...SKILLS,
-      value: state.listOfEducation[state.pageNumber].skills,
+      value: state.listOfColleges[state.pageNumber].skills,
       setValue: skills => handleSetValue('skills', skills, setState),
     },
   ];
 
-  const onSubmit = () => setColleges([...state.listOfEducation]);
+  const onSubmit = () =>
+    setColleges({
+      targetDataName: 'colleges',
+      updatedData: [...state.listOfColleges],
+    });
+
+  useEffect(
+    () =>
+      setState(prevState => ({
+        ...prevState,
+        listOfColleges: [...colleges],
+      })),
+    [colleges]
+  );
 
   return (
     <DynamicModal title={title} fields={educationFields} onSubmit={onSubmit} />
