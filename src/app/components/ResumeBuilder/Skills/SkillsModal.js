@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import DynamicModal from '../Common/DynamicModal';
 import { SKILLS_INFORMATION_STATISTICS } from '@/app/utils';
 import { useQueryClient } from 'react-query';
 import { useUpdateData } from '@/app/hooks/useUpdateData';
+import DynamicModal from '../../Common/DynamicModal';
 const { ADD_SKILL } = SKILLS_INFORMATION_STATISTICS;
 
 export default function SkillsModal({ title }) {

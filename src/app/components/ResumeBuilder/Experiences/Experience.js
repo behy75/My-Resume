@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import { usePrintModeStore } from '@/store';
-import DropDownSymbol from '../Common/DropDownSymbol';
-import { experiencesVariants } from '../Common/FramerMotionVariants';
+import DropDownSymbol from '../../Common/DropDownSymbol';
+import { experiencesVariants } from '../../Common/FramerMotionVariants';
 
 export default function Experience(props) {
   const {

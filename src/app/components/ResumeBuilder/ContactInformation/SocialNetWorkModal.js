@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import DynamicModal from '../Common/DynamicModal';
 import { CONTACT_INFORMATION_STATISTICS } from '@/app/utils';
 import { useQueryClient } from 'react-query';
 import { useUpdateData } from '@/app/hooks/useUpdateData';
+import DynamicModal from '../../Common/DynamicModal';
 const { WEBSITE_URL, LINKEDIN, GITHUB, EMAIL, PHONE } =
   CONTACT_INFORMATION_STATISTICS;
 

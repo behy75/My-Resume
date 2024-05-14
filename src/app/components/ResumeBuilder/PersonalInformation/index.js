@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { usePrintModeStore } from '@/store';
 import { useFetchData } from '@/app/hooks/useFetchData';
 import PersonalInformationModal from './PersonalInformationModal';
-import LoadingAndError from '../Common/LoadingAndError';
+import LoadingAndError from '../../Common/LoadingAndError';
 
 function DisplaySection({
   firstName,

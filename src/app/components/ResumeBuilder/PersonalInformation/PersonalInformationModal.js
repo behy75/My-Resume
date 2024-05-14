@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import DynamicModal from '../Common/DynamicModal';
 import { PERSONAL_INFORMATION_STATISTICS } from '@/app/utils';
 import { useQueryClient } from 'react-query';
 import { useUpdateData } from '@/app/hooks/useUpdateData';
+import DynamicModal from '../../Common/DynamicModal';
 const { FIRST_NAME, LAST_NAME, POSITION, ADDRESS, STACK } =
   PERSONAL_INFORMATION_STATISTICS;
 

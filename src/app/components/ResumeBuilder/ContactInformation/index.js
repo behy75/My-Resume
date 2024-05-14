@@ -3,7 +3,7 @@ import { usePrintModeStore } from '@/store';
 import SocialNetwork from './SocialNetwork';
 import SocialNetWorkModal from './SocialNetWorkModal';
 import { useFetchData } from '@/app/hooks/useFetchData';
-import LoadingAndError from '../Common/LoadingAndError';
+import LoadingAndError from '../../Common/LoadingAndError';
 
 function DisplaySection({ socialNetworks, isLoading, error, isError }) {
   if (isLoading) {

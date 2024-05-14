@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useQueryClient } from 'react-query';
-import DynamicModal from '../Common/DynamicModal';
 import { SUMMARY_INFORMATION_STATISTICS } from '@/app/utils';
 import { useUpdateData } from '@/app/hooks/useUpdateData';
+import DynamicModal from '../../Common/DynamicModal';
 const { SUMMARY } = SUMMARY_INFORMATION_STATISTICS;
 
 export default function SummaryModal() {

@@ -2,8 +2,8 @@ import React, { useMemo } from 'react';
 import { usePrintModeStore } from '@/store';
 import School from './School';
 import EducationModal from './EducationModal';
-import LoadingAndError from '../Common/LoadingAndError';
 import { useFetchData } from '@/app/hooks/useFetchData';
+import LoadingAndError from '../../Common/LoadingAndError';
 
 function DisplaySection({ colleges, isLoading, error, isError }) {
   if (isLoading) {

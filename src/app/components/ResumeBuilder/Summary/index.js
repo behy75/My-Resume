@@ -1,10 +1,10 @@
 import React, { useEffect, useMemo } from 'react';
 import Typical from 'react-typical';
 import { usePrintModeStore, useShowFullSummary } from '@/store';
-import CheckBox from '../Common/CheckBox';
 import SummaryModal from './SummaryModal';
 import { useFetchData } from '@/app/hooks/useFetchData';
-import LoadingAndError from '../Common/LoadingAndError';
+import LoadingAndError from '../../Common/LoadingAndError';
+import CheckBox from '../../Common/CheckBox';
 
 function modifySummary(summary) {
   const summaryArray = summary.split(/[,.]/);

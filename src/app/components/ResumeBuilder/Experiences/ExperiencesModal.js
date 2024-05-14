@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import DynamicModal from '../Common/DynamicModal';
 import {
   handleRemovePage,
   handleSelectPage,
@@ -8,6 +7,7 @@ import {
 import { EXPERIENCES_STATISTICS } from '@/app/utils';
 import { useUpdateData } from '@/app/hooks/useUpdateData';
 import { useQueryClient } from 'react-query';
+import DynamicModal from '../../Common/DynamicModal';
 const {
   SELECT_PAGE,
   REMOVE_PAGE,

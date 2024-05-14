@@ -3,7 +3,7 @@ import { usePrintModeStore } from '@/store';
 import Experience from './Experience';
 import ExperiencesModal from './ExperiencesModal';
 import { useFetchData } from '@/app/hooks/useFetchData';
-import LoadingAndError from '../Common/LoadingAndError';
+import LoadingAndError from '../../Common/LoadingAndError';
 
 function DisplaySection({ experiences, isLoading, error, isError }) {
   if (isLoading) {
