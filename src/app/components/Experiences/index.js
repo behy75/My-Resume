@@ -15,11 +15,7 @@ function DisplaySection({ experiences, isLoading, error, isError }) {
   }
 
   return (
-    <section className="break-inside-avoid">
-      <h2 className="mb-2 text-xl font-black tracking-widest text-gray-800 print:font-normal">
-        EXPERIENCE
-      </h2>
-      {/* Jobs */}
+    <>
       {experiences.map((experience, index) => (
         <div key={index}>
           <Experience
@@ -32,7 +28,7 @@ function DisplaySection({ experiences, isLoading, error, isError }) {
           />
         </div>
       ))}
-    </section>
+    </>
   );
 }
 
@@ -58,12 +54,18 @@ export default function Experiences() {
       )}
 
       {/* To keep in the same column */}
-      <DisplaySection
-        experiences={experiences}
-        isLoading={isLoading}
-        error={error}
-        isError={isError}
-      />
+      <section className="break-inside-avoid">
+        <h2 className="mb-2 text-xl font-black tracking-widest text-gray-800 print:font-normal">
+          EXPERIENCE
+        </h2>
+        {/* Jobs */}
+        <DisplaySection
+          experiences={experiences}
+          isLoading={isLoading}
+          error={error}
+          isError={isError}
+        />
+      </section>
     </section>
   );
 }
