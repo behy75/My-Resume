@@ -1,17 +1,19 @@
-import { useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 import EmailInput from '../Common/Inputs/EmailInput';
 import PasswordInput from '../Common/Inputs/PasswordInput';
 import { validateEmail } from '../Common/Inputs/EmailInput/validateEmail';
+import { useRegisterNewUser } from '@/app/hooks/useVerification';
 
 export default function RegisterComponent() {
   const router = useRouter();
+  const { mutate: sendNewUserData } = useRegisterNewUser();
+
   const [state, setState] = useState({
     emailAddress: '',
     password: '',
     confirmPassword: '',
   });
-  console.log(state);
 
   const handleEmailAddress = emailAddress => {
     setState(prevState => ({
@@ -41,7 +43,11 @@ export default function RegisterComponent() {
 
   const handleLogin = event => {
     event.preventDefault();
-    router.push('/');
+    // sendNewUserData({
+    //   email_address: state.emailAddress,
+    //   password: state.password,
+    // });
+    // router.push('/');
   };
 
   return (
