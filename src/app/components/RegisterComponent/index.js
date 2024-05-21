@@ -1,14 +1,24 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 import EmailInput from '../Common/Inputs/EmailInput';
 import PasswordInput from '../Common/Inputs/PasswordInput';
 import { validateEmail } from '../Common/Inputs/EmailInput/validateEmail';
 import { useRegisterNewUser } from '@/app/hooks/useVerification';
+import Loading from '../Common/LoadingAndError/Loading';
+import { notifyError, notifyWarning } from '../Common/Notify';
+import { useUserLoggedIn } from '@/store';
 
 export default function RegisterComponent() {
   const router = useRouter();
-  const { mutate: sendNewUserData } = useRegisterNewUser();
-
+  const { setUserLoggedInData } = useUserLoggedIn(state => state);
+  const {
+    mutate: sendNewUserData,
+    data: registerData,
+    isError: isRegisterErrored,
+    error: registerError,
+    isLoading: isRegisterLoading,
+    isSuccess: isRegisterSucceed,
+  } = useRegisterNewUser();
   const [state, setState] = useState({
     emailAddress: '',
     password: '',
@@ -41,14 +51,47 @@ export default function RegisterComponent() {
     [state]
   );
 
-  const handleLogin = event => {
+  const handleRegister = event => {
     event.preventDefault();
-    // sendNewUserData({
-    //   email_address: state.emailAddress,
-    //   password: state.password,
-    // });
-    // router.push('/');
+    sendNewUserData({
+      email: state.emailAddress,
+      password: state.password,
+    });
   };
+
+  useEffect(() => {
+    if (isRegisterErrored) {
+      const { status: registerErrorStatus, data: registerErrorData } =
+        registerError?.response;
+      if (registerErrorStatus === 400) {
+        notifyWarning(registerErrorData?.error);
+        setTimeout(() => {
+          router.push('/login');
+        }, 3500);
+      } else if (registerErrorStatus === 500) {
+        notifyError(registerErrorData?.error);
+      }
+    } else if (isRegisterSucceed) {
+      localStorage.setItem(
+        'user',
+        JSON.stringify({ email: state.emailAddress, token: registerData.token })
+      );
+      setUserLoggedInData({
+        token: loginData.token,
+        isLogin: isLoginSucceed,
+        loginMessage: loginData?.message,
+      });
+      router.push('/');
+    }
+  }, [isRegisterErrored, isRegisterSucceed]);
+
+  useEffect(() => {
+    const userStore = localStorage.getItem('user');
+    const userData = JSON.parse(userStore);
+    if (!!userData?.token) {
+      router.push('/');
+    }
+  }, []);
 
   return (
     <section className="max-w-3xl mx-auto bg-gray-100 rounded-2xl border-4 border-gray-700 print:border-0 page print:max-w-letter print:max-h-letter print:mx-0 print:my-o xsm:p-8 print:bg-white md:h-letter lg:h-letter">
@@ -99,7 +142,7 @@ export default function RegisterComponent() {
             <div>
               <button
                 disabled={!canRegister}
-                onClick={handleLogin}
+                onClick={handleRegister}
                 type="submit"
                 className={`flex w-full justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ${
                   canRegister
@@ -107,7 +150,7 @@ export default function RegisterComponent() {
                     : 'bg-gray-500 text-gray-400 cursor-not-allowed'
                 }`}
               >
-                Sign up
+                {!isRegisterLoading ? 'Sign up' : <Loading />}
               </button>
             </div>
           </form>

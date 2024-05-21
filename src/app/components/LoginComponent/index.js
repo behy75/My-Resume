@@ -1,13 +1,31 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import EmailInput from '../Common/Inputs/EmailInput';
 import PasswordInput from '../Common/Inputs/PasswordInput';
-import Link from 'next/link';
 import { validateEmail } from '../Common/Inputs/EmailInput/validateEmail';
+import { useProtectedRoute, useLoginUser } from '@/app/hooks/useVerification';
+import { notifyError, notifyWarning } from '../Common/Notify';
+import Loading from '../Common/LoadingAndError/Loading';
+import { useUserLoggedIn } from '@/store';
 
 export default function LoginComponent() {
   const router = useRouter();
-  const [state, setState] = useState({ emailAddress: '', password: '' });
+  const { setUserLoggedInData } = useUserLoggedIn(state => state);
+  const {
+    mutate: sendUserData,
+    data: loginData,
+    isError: isLoginErrored,
+    error: loginError,
+    isLoading: isLoginLoading,
+    isSuccess: isLoginSucceed,
+  } = useLoginUser();
+  const [state, setState] = useState({
+    emailAddress: '',
+    password: '',
+  });
+  const [token, setToken] = useState('');
+  const authenticationToken = useProtectedRoute(token);
 
   const handleEmailAddress = emailAddress => {
     setState(prevState => ({
@@ -27,8 +45,43 @@ export default function LoginComponent() {
 
   const handleLogin = event => {
     event.preventDefault();
-    router.push('/');
+    sendUserData({ email: state.emailAddress, password: state.password });
   };
+
+  useEffect(() => {
+    if (isLoginErrored) {
+      const { status: loginErrorStatus, data: loginErrorData } =
+        loginError?.response;
+
+      if (loginErrorStatus === 401) {
+        notifyWarning(loginErrorData?.error);
+      } else if (loginErrorStatus === 404 || loginErrorStatus === 500) {
+        notifyError(loginErrorData?.error);
+      }
+    } else if (isLoginSucceed) {
+      setUserLoggedInData({
+        token: loginData.token,
+        isLogin: isLoginSucceed,
+        loginMessage: loginData?.message,
+      });
+      localStorage.setItem(
+        'user',
+        JSON.stringify({ email: state.emailAddress, token: loginData.token })
+      );
+      router.push('/');
+    }
+  }, [isLoginErrored, isLoginSucceed]);
+
+  useEffect(() => {
+    const userStore = localStorage.getItem('user');
+    const userData = JSON.parse(userStore);
+    if (!!userData?.token) {
+      setToken(userData?.token);
+      setTimeout(() => {}, 1000);
+      // console.log(authenticationToken);
+      // router.push('/');
+    }
+  }, []);
 
   return (
     <section className="max-w-3xl mx-auto bg-gray-100 rounded-2xl border-4 border-gray-700 print:border-0 page print:max-w-letter print:max-h-letter print:mx-0 print:my-o xsm:p-8 print:bg-white md:h-letter lg:h-letter">
@@ -80,7 +133,7 @@ export default function LoginComponent() {
                     : 'bg-gray-500 text-gray-400 cursor-not-allowed'
                 }`}
               >
-                Sign in
+                {!isLoginLoading ? 'Sign in' : <Loading />}
               </button>
             </div>
 

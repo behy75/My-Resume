@@ -1,8 +1,8 @@
 'use client';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import AnimatedCursor from 'react-animated-cursor';
 import { AnimatePresence } from 'framer-motion';
-import { usePrintModeStore } from '@/store';
+import { usePrintModeStore, useUserLoggedIn } from '@/store';
 import PersonalInformation from './PersonalInformation';
 import ContactInformation from './ContactInformation';
 import Summary from './Summary';
@@ -10,14 +10,30 @@ import Education from './Education';
 import Experiences from './Experiences';
 import Skills from './Skills';
 import Header from './Header';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { notifySuccess } from '../Common/Notify';
 
 export default function ResumeBuilder() {
   const containerRef = useRef();
   const { isPrintMode } = usePrintModeStore(state => state);
+  const { loginMessage, isLogin } = useUserLoggedIn(state => state);
+
+  useEffect(() => {
+    if (isLogin) {
+      console.log(isLogin);
+      notifySuccess(loginMessage);
+    }
+  }, [isLogin]);
 
   return (
     <AnimatePresence>
       <>
+        <ToastContainer
+          autoClose={2000}
+          closeButton={true}
+          style={{ width: '400px' }}
+        />
         {!isPrintMode && (
           <AnimatedCursor
             innerSize={8}

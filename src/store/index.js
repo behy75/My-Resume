@@ -14,3 +14,11 @@ export const useShowFullSummary = create(set => ({
     set(state => ({ showFullSummary: newShowFullSummary })),
   setSummary: summary => set(state => ({ ...summary })),
 }));
+
+export const useUserLoggedIn = create(set => ({
+  token: '',
+  loginMessage: '',
+  isLogin: false,
+  setUserLoggedInData: ({ token, isLogin, loginMessage }) =>
+    set(state => ({ token, isLogin, loginMessage })),
+}));
