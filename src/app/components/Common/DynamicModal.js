@@ -1,11 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AnimatePresence, motion, useCycle } from 'framer-motion';
 import FieldControls from './FieldControls';
-import {
-  dynamicModalVariants,
-  inputsVariants,
-  skillsVariants,
-} from './FramerMotionVariants';
+import { dynamicModalVariants, skillsVariants } from './FramerMotionVariants';
+import Loading from './LoadingAndError/Loading';
 
 const Path = props => (
   <motion.path
@@ -27,7 +24,7 @@ const withDynamicModal = WrappedComponent => {
       ? 'bottom-6'
       : 'bottom-1';
 
-    const toggleModal = () => {
+    const handleToggleModal = () => {
       toggleOpen(!isOpen);
     };
 
@@ -69,7 +66,10 @@ const withDynamicModal = WrappedComponent => {
               id="default-modal"
               className="fixed inset-0 z-50 overflow-y-auto items-center justify-center flex"
             >
-              <WrappedComponent toggleModal={toggleModal} {...rest} />
+              <WrappedComponent
+                handleToggleModal={handleToggleModal}
+                {...rest}
+              />
             </motion.div>
           )}
         </motion.div>
@@ -80,12 +80,25 @@ const withDynamicModal = WrappedComponent => {
 
 // Modal component with dynamic input fields
 function ModalContent(props) {
-  const { title, fields = [], items = [], toggleModal, onSubmit } = props;
-  console.log(props);
+  const {
+    title,
+    fields = [],
+    items = [],
+    handleToggleModal,
+    onSubmit,
+    isLoading,
+    closeModal,
+  } = props;
+
   const onSubmitModal = () => {
     onSubmit();
-    toggleModal();
   };
+
+  useEffect(() => {
+    if (closeModal) {
+      handleToggleModal();
+    }
+  }, [closeModal]);
 
   return (
     <div className="relative p-4 w-full max-w-5xl max-h-full">
@@ -97,7 +110,7 @@ function ModalContent(props) {
         <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t border-gray-600">
           <h3 className="text-xl font-semibold text-white">{title}</h3>
           <button
-            onClick={toggleModal}
+            onClick={handleToggleModal}
             type="button"
             className="text-white bg-transparent hover:bg-gray-200rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
             data-modal-hide="default-modal"
@@ -172,7 +185,7 @@ function ModalContent(props) {
         </div>
         <div className="flex justify-end items-center text-gray-600 p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-800">
           <button
-            onClick={toggleModal}
+            onClick={handleToggleModal}
             data-modal-hide="default-modal"
             type="button"
             className="py-2.5 w-20 text-sm font-medium focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
@@ -185,7 +198,7 @@ function ModalContent(props) {
             type="button"
             className="text-white ms-3 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-20 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
-            Save
+            {!isLoading ? 'Save' : <Loading />}
           </button>
         </div>
       </motion.div>

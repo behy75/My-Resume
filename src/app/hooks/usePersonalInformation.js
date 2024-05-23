@@ -10,6 +10,7 @@ export const useUpdatePersonalInformation = () => {
   const queryClient = useQueryClient();
 
   return useMutation(
+    'send-personal-information',
     payload => apiRequest('patch', 'app/personal-information', payload),
     {
       onSuccess: data => {

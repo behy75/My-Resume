@@ -3,6 +3,7 @@ import { PERSONAL_INFORMATION_STATISTICS } from '@/app/utils';
 import { useQueryClient } from 'react-query';
 import { useUpdatePersonalInformation } from '@/app/hooks/usePersonalInformation';
 import DynamicModal from '../../Common/DynamicModal';
+import { notifyError, notifySuccess } from '../../Common/Notify';
 const { FIRST_NAME, LAST_NAME, POSITION, ADDRESS, STACK } =
   PERSONAL_INFORMATION_STATISTICS;
 
@@ -32,7 +33,7 @@ function PersonalInformationModal({ title }) {
     address,
     stack,
   });
-
+  const [closeModal, setCloseModal] = useState(false);
   const personalInformationFields = [
     {
       ...FIRST_NAME,
@@ -61,6 +62,18 @@ function PersonalInformationModal({ title }) {
       setValue: stack => setState(prevState => ({ ...prevState, stack })),
     },
   ];
+  const onSuccess = () => {
+    setCloseModal(true);
+    notifySuccess(
+      data?.message || 'Personal information successfully updated.'
+    );
+    setTimeout(() => {
+      setCloseModal(false);
+    });
+  };
+  const onError = () => {
+    notifyError(error?.message || 'Request failed.');
+  };
 
   const onSubmit = () => {
     const updatedData = {
@@ -72,7 +85,7 @@ function PersonalInformationModal({ title }) {
       date_of_birth: null,
       gender: null,
     };
-    setPersonalInformation(updatedData);
+    setPersonalInformation(updatedData, { onSuccess, onError });
   };
 
   return (
@@ -81,9 +94,7 @@ function PersonalInformationModal({ title }) {
       fields={personalInformationFields}
       onSubmit={onSubmit}
       isLoading={isLoading}
-      isSuccess={isSuccess}
-      isError={isError}
-      error={error}
+      closeModal={closeModal}
     />
   );
 }

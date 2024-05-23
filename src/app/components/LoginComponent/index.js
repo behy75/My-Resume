@@ -5,12 +5,12 @@ import EmailInput from '../Common/Inputs/EmailInput';
 import PasswordInput from '../Common/Inputs/PasswordInput';
 import { validateEmail } from '../Common/Inputs/EmailInput/validateEmail';
 import { useProtectedToken, useLoginUser } from '@/app/hooks/useVerification';
-import { notifyError, notifyWarning } from '../Common/Notify';
 import Loading from '../Common/LoadingAndError/Loading';
 import { useUserLoggedIn } from '@/store';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useQueryClient } from 'react-query';
+import { useNotification } from '@/app/hooks/useNotification';
 
 export default function LoginComponent() {
   const router = useRouter();
@@ -19,10 +19,10 @@ export default function LoginComponent() {
   const {
     mutate: sendUserData,
     data: loginData,
-    isError: isLoginErrored,
-    error: loginError,
-    isLoading: isLoginLoading,
-    isSuccess: isLoginSucceed,
+    isError,
+    error,
+    isLoading,
+    isSuccess,
   } = useLoginUser();
   const [state, setState] = useState({
     emailAddress: '',
@@ -52,29 +52,22 @@ export default function LoginComponent() {
     sendUserData({ email: state.emailAddress, password: state.password });
   };
 
-  useEffect(() => {
-    if (isLoginErrored) {
-      const { status: loginErrorStatus, data: loginErrorData } =
-        loginError?.response;
+  const succeedFunction = () => {
+    setUserLoggedInData({
+      token: loginData.token,
+      isLogin: isSuccess,
+      loginMessage: loginData?.message,
+    });
+    localStorage.setItem(
+      'user',
+      JSON.stringify({ email: state.emailAddress, token: loginData.token })
+    );
+    router.push('/');
+  };
 
-      if (loginErrorStatus === 401) {
-        notifyWarning(loginErrorData?.error);
-      } else if (loginErrorStatus === 404 || loginErrorStatus === 500) {
-        notifyError(loginErrorData?.error);
-      }
-    } else if (isLoginSucceed) {
-      setUserLoggedInData({
-        token: loginData.token,
-        isLogin: isLoginSucceed,
-        loginMessage: loginData?.message,
-      });
-      localStorage.setItem(
-        'user',
-        JSON.stringify({ email: state.emailAddress, token: loginData.token })
-      );
-      router.push('/');
-    }
-  }, [isLoginErrored, isLoginSucceed]);
+  useEffect(() => {
+    useNotification(isError, error, isSuccess, succeedFunction);
+  }, [isError, isSuccess]);
 
   useEffect(() => {
     if (tokenIsProtected) {
@@ -90,14 +83,6 @@ export default function LoginComponent() {
         style={{ width: '400px' }}
       />
 
-      {/*
-          This example requires updating your template:
-  
-          ```
-          <html class="h-full bg-white">
-          <body class="h-full">
-          ```
-        */}
       <div className="flex bg-gray-700 h-[60vh] w-[60vh] flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
@@ -138,7 +123,7 @@ export default function LoginComponent() {
                     : 'bg-gray-500 text-gray-400 cursor-not-allowed'
                 }`}
               >
-                {!isLoginLoading ? 'Sign in' : <Loading />}
+                {!isLoading ? 'Sign in' : <Loading />}
               </button>
             </div>
 

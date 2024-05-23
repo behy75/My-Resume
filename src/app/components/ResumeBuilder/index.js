@@ -1,5 +1,7 @@
 'use client';
 import React, { useEffect, useRef } from 'react';
+import { useQueryClient } from 'react-query';
+import { useRouter } from 'next/router';
 import AnimatedCursor from 'react-animated-cursor';
 import { AnimatePresence } from 'framer-motion';
 import { usePrintModeStore, useUserLoggedIn } from '@/store';
@@ -13,18 +15,25 @@ import Header from './Header';
 import { notifySuccess } from '../Common/Notify';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useProtectedToken } from '@/app/hooks/useVerification';
 
 export default function ResumeBuilder() {
   const containerRef = useRef();
+  const queryClient = useQueryClient();
+  const router = useRouter();
   const { isPrintMode } = usePrintModeStore(state => state);
   const { loginMessage, isLogin } = useUserLoggedIn(state => state);
+  const authenticationToken = useProtectedToken();
+  const { tokenIsProtected } = queryClient.getQueryData('protected');
 
   useEffect(() => {
     if (isLogin) {
-      console.log(isLogin);
       notifySuccess(loginMessage);
     }
-  }, [isLogin]);
+    if (!tokenIsProtected) {
+      router.push('/login');
+    }
+  }, []);
 
   return (
     <AnimatePresence>

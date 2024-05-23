@@ -3,13 +3,16 @@ import { useRouter } from 'next/router';
 import EmailInput from '../Common/Inputs/EmailInput';
 import PasswordInput from '../Common/Inputs/PasswordInput';
 import { validateEmail } from '../Common/Inputs/EmailInput/validateEmail';
-import { useProtectedToken, useRegisterNewUser } from '@/app/hooks/useVerification';
+import {
+  useProtectedToken,
+  useRegisterNewUser,
+} from '@/app/hooks/useVerification';
 import Loading from '../Common/LoadingAndError/Loading';
-import { notifyError, notifyWarning } from '../Common/Notify';
 import { useUserLoggedIn } from '@/store';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useQueryClient } from 'react-query';
+import { useNotification } from '@/app/hooks/useNotification';
 
 export default function RegisterComponent() {
   const router = useRouter();
@@ -20,10 +23,10 @@ export default function RegisterComponent() {
   const {
     mutate: sendNewUserData,
     data: registerData,
-    isError: isRegisterErrored,
-    error: registerError,
-    isLoading: isRegisterLoading,
-    isSuccess: isRegisterSucceed,
+    isError,
+    error,
+    isLoading,
+    isSuccess,
   } = useRegisterNewUser();
   const [state, setState] = useState({
     emailAddress: '',
@@ -65,31 +68,22 @@ export default function RegisterComponent() {
     });
   };
 
+  const succeedFunction = () => {
+    setUserLoggedInData({
+      token: loginData.token,
+      isLogin: isSuccess,
+      loginMessage: loginData?.message,
+    });
+    localStorage.setItem(
+      'user',
+      JSON.stringify({ email: state.emailAddress, token: registerData.token })
+    );
+    router.push('/');
+  };
+
   useEffect(() => {
-    if (isRegisterErrored) {
-      const { status: registerErrorStatus, data: registerErrorData } =
-        registerError?.response;
-      if (registerErrorStatus === 400) {
-        notifyWarning(registerErrorData?.error);
-        setTimeout(() => {
-          router.push('/login');
-        }, 3500);
-      } else if (registerErrorStatus === 500) {
-        notifyError(registerErrorData?.error);
-      }
-    } else if (isRegisterSucceed) {
-      localStorage.setItem(
-        'user',
-        JSON.stringify({ email: state.emailAddress, token: registerData.token })
-      );
-      setUserLoggedInData({
-        token: loginData.token,
-        isLogin: isLoginSucceed,
-        loginMessage: loginData?.message,
-      });
-      router.push('/');
-    }
-  }, [isRegisterErrored, isRegisterSucceed]);
+    useNotification(isError, error, isSuccess, succeedFunction, router);
+  }, [isError, isSuccess]);
 
   useEffect(() => {
     if (tokenIsProtected) {
@@ -105,14 +99,6 @@ export default function RegisterComponent() {
         style={{ width: '400px' }}
       />
 
-      {/*
-          This example requires updating your template:
-  
-          ```
-          <html class="h-full bg-white">
-          <body class="h-full">
-          ```
-        */}
       <div className="flex bg-gray-700 h-[70vh] w-[60vh] flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
@@ -160,7 +146,7 @@ export default function RegisterComponent() {
                     : 'bg-gray-500 text-gray-400 cursor-not-allowed'
                 }`}
               >
-                {!isRegisterLoading ? 'Sign up' : <Loading />}
+                {!isLoading ? 'Sign up' : <Loading />}
               </button>
             </div>
           </form>
