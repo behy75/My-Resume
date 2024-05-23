@@ -4,13 +4,17 @@ import { useRouter } from 'next/router';
 import EmailInput from '../Common/Inputs/EmailInput';
 import PasswordInput from '../Common/Inputs/PasswordInput';
 import { validateEmail } from '../Common/Inputs/EmailInput/validateEmail';
-import { useProtectedRoute, useLoginUser } from '@/app/hooks/useVerification';
+import { useProtectedToken, useLoginUser } from '@/app/hooks/useVerification';
 import { notifyError, notifyWarning } from '../Common/Notify';
 import Loading from '../Common/LoadingAndError/Loading';
 import { useUserLoggedIn } from '@/store';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useQueryClient } from 'react-query';
 
 export default function LoginComponent() {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const { setUserLoggedInData } = useUserLoggedIn(state => state);
   const {
     mutate: sendUserData,
@@ -24,8 +28,8 @@ export default function LoginComponent() {
     emailAddress: '',
     password: '',
   });
-  const [token, setToken] = useState('');
-  const authenticationToken = useProtectedRoute(token);
+  const authenticationToken = useProtectedToken();
+  const { tokenIsProtected } = queryClient.getQueryData('protected');
 
   const handleEmailAddress = emailAddress => {
     setState(prevState => ({
@@ -73,18 +77,19 @@ export default function LoginComponent() {
   }, [isLoginErrored, isLoginSucceed]);
 
   useEffect(() => {
-    const userStore = localStorage.getItem('user');
-    const userData = JSON.parse(userStore);
-    if (!!userData?.token) {
-      setToken(userData?.token);
-      setTimeout(() => {}, 1000);
-      // console.log(authenticationToken);
-      // router.push('/');
+    if (tokenIsProtected) {
+      router.push('/');
     }
-  }, []);
+  }, [tokenIsProtected]);
 
   return (
     <section className="max-w-3xl mx-auto bg-gray-100 rounded-2xl border-4 border-gray-700 print:border-0 page print:max-w-letter print:max-h-letter print:mx-0 print:my-o xsm:p-8 print:bg-white md:h-letter lg:h-letter">
+      <ToastContainer
+        autoClose={2000}
+        closeButton={true}
+        style={{ width: '400px' }}
+      />
+
       {/*
           This example requires updating your template:
   

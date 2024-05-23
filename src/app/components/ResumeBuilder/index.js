@@ -10,9 +10,9 @@ import Education from './Education';
 import Experiences from './Experiences';
 import Skills from './Skills';
 import Header from './Header';
+import { notifySuccess } from '../Common/Notify';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { notifySuccess } from '../Common/Notify';
 
 export default function ResumeBuilder() {
   const containerRef = useRef();

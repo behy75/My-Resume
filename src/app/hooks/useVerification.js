@@ -1,88 +1,47 @@
-import axios from 'axios';
 import { useMutation, useQuery } from 'react-query';
-
-const baseURL = 'http://localhost:4000/auth/';
-
-const register = async data => {
-  try {
-    const response = await axios.post(
-      `${baseURL}register`,
-      { ...data },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    );
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
-
-const login = async data => {
-  try {
-    const response = await axios.post(
-      `${baseURL}login`,
-      { ...data },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    );
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
-
-const protectedRoute = async token => {
-  try {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    };
-    if (!token) return {};
-    const response = axios.get(`${baseURL}protected`, config);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
+import { apiRequest } from './apiRequest';
 
 export const useLoginUser = () => {
-  return useMutation('login', login, {
-    onError: error => {
-      // Handle the error here
-      console.error('Login error:', error);
-    },
-    onSuccess: data => {
-      // Handle successful registration here
-      console.log('Login successful:', data);
-    },
-  });
+  return useMutation(
+    'login',
+    payload => apiRequest('post', 'auth/login', payload),
+    {
+      onError: error => {
+        // Handle the error here
+        console.error('Login error:', error);
+      },
+      onSuccess: data => {
+        // Handle successful registration here
+        console.log('Login successful:', data);
+      },
+    }
+  );
 };
 
 export const useRegisterNewUser = () => {
-  return useMutation('register', register, {
-    onError: error => {
-      // Handle the error here
-      console.error('Registration error:', error);
-    },
-    onSuccess: data => {
-      // Handle successful registration here
-      console.log('Registration successful:', data);
-    },
-  });
+  return useMutation(
+    'register',
+    payload => apiRequest('post', 'auth/register', payload),
+    {
+      onError: error => {
+        // Handle the error here
+        console.error('Registration error:', error);
+      },
+      onSuccess: data => {
+        // Handle successful registration here
+        console.log('Registration successful:', data);
+      },
+    }
+  );
 };
 
-export const useProtectedRoute = token => {
-  return useQuery(protectedRoute(token), {
-    // cacheTime: 1000 * 60 * 60 * 24,
-    // staleTime: false,
+export const useProtectedToken = () => {
+  const fetchProtectedData = () => apiRequest('get', 'auth/protected');
+
+  return useQuery('protected', fetchProtectedData, {
+    initialData: { tokenIsProtected: false },
+    cacheTime: 1000 * 60 * 60 * 24,
+    staleTime: false,
     // onSuccess,
     // onError,
   });

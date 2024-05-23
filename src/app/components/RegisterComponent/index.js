@@ -3,14 +3,20 @@ import { useRouter } from 'next/router';
 import EmailInput from '../Common/Inputs/EmailInput';
 import PasswordInput from '../Common/Inputs/PasswordInput';
 import { validateEmail } from '../Common/Inputs/EmailInput/validateEmail';
-import { useRegisterNewUser } from '@/app/hooks/useVerification';
+import { useProtectedToken, useRegisterNewUser } from '@/app/hooks/useVerification';
 import Loading from '../Common/LoadingAndError/Loading';
 import { notifyError, notifyWarning } from '../Common/Notify';
 import { useUserLoggedIn } from '@/store';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useQueryClient } from 'react-query';
 
 export default function RegisterComponent() {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const { setUserLoggedInData } = useUserLoggedIn(state => state);
+  const authenticationToken = useProtectedToken();
+  const { tokenIsProtected } = queryClient.getQueryData('protected');
   const {
     mutate: sendNewUserData,
     data: registerData,
@@ -86,15 +92,19 @@ export default function RegisterComponent() {
   }, [isRegisterErrored, isRegisterSucceed]);
 
   useEffect(() => {
-    const userStore = localStorage.getItem('user');
-    const userData = JSON.parse(userStore);
-    if (!!userData?.token) {
+    if (tokenIsProtected) {
       router.push('/');
     }
-  }, []);
+  }, [tokenIsProtected]);
 
   return (
     <section className="max-w-3xl mx-auto bg-gray-100 rounded-2xl border-4 border-gray-700 print:border-0 page print:max-w-letter print:max-h-letter print:mx-0 print:my-o xsm:p-8 print:bg-white md:h-letter lg:h-letter">
+      <ToastContainer
+        autoClose={2000}
+        closeButton={true}
+        style={{ width: '400px' }}
+      />
+
       {/*
           This example requires updating your template:
   

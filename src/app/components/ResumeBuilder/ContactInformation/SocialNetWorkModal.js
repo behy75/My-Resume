@@ -58,23 +58,22 @@ function SocialNetWorkModal({ title }) {
     },
   ];
 
-  const onSubmit = () =>
+  const onSubmit = () => {
     setContactInformation({
       targetDataName: 'experiences',
       updatedData: [...state],
     });
+  };
 
-  useEffect(
-    () =>
-      setState(prevState => ({
-        webSite: { ...findSocialNetworks(socialNetworks, 'website') },
-        linkedin: { ...findSocialNetworks(socialNetworks, 'linkedin') },
-        gitHub: { ...findSocialNetworks(socialNetworks, 'git hub') },
-        email: { ...findSocialNetworks(socialNetworks, 'email') },
-        phone: { ...findSocialNetworks(socialNetworks, 'phone') },
-      })),
-    [state]
-  );
+  useEffect(() => {
+    setState(prevState => ({
+      webSite: { ...findSocialNetworks(socialNetworks, 'website') },
+      linkedin: { ...findSocialNetworks(socialNetworks, 'linkedin') },
+      gitHub: { ...findSocialNetworks(socialNetworks, 'git hub') },
+      email: { ...findSocialNetworks(socialNetworks, 'email') },
+      phone: { ...findSocialNetworks(socialNetworks, 'phone') },
+    }));
+  }, []);
 
   return (
     <DynamicModal

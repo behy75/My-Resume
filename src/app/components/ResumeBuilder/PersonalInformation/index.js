@@ -1,9 +1,10 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { usePrintModeStore } from '@/store';
 import { useFetchData } from '@/app/hooks/useFetchData';
 import PersonalInformationModal from './PersonalInformationModal';
 import LoadingAndError from '../../Common/LoadingAndError';
+import { useFetchPersonalInformation } from '@/app/hooks/usePersonalInformation';
 
 function DisplaySection({
   firstName,
@@ -65,15 +66,16 @@ function DisplaySection({
 export default function PersonalInformation() {
   const { isPrintMode } = usePrintModeStore(state => state);
   const {
-    data: personalInformation = '',
+    data: personalInformation = {},
     isLoading,
     error,
     isError,
     isFetching,
     refetch,
-  } = useFetchData('personal_details');
+  } = useFetchPersonalInformation();
+
   const {
-    address,
+    address = '',
     first_name: firstName,
     last_name: lastName,
     role: position,

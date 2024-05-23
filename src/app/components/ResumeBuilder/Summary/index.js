@@ -27,7 +27,7 @@ function DisplaySection({
   isError,
 }) {
   const showSummary = useMemo(() => {
-    return !isError && !isLoading && !isPrintMode;
+    return !isError && !isLoading && !isPrintMode && !showFullSummary;
   }, [showFullSummary, isPrintMode]);
   const newArray = modifySummary(summary);
 

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useMutation } from 'react-query';
 
-const baseURL = 'http://localhost:4000/';
+const baseURL = 'http://localhost:4001/';
 
 const updateData = async data => {
   try {

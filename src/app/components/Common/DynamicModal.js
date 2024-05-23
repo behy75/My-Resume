@@ -79,13 +79,9 @@ const withDynamicModal = WrappedComponent => {
 };
 
 // Modal component with dynamic input fields
-function ModalContent({
-  title,
-  fields = [],
-  items = [],
-  toggleModal,
-  onSubmit,
-}) {
+function ModalContent(props) {
+  const { title, fields = [], items = [], toggleModal, onSubmit } = props;
+  console.log(props);
   const onSubmitModal = () => {
     onSubmit();
     toggleModal();

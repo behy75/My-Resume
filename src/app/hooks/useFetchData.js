@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useQuery } from 'react-query';
 
-const baseURL = 'http://localhost:4000/';
+const baseURL = 'http://localhost:4001/';
 
 const fetchData = async targetDataName => {
   const response = await axios.get(`${baseURL}${targetDataName}`);

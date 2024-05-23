@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "serve-json": "json-server --watch DB.json --port 4000"
+    "serve-json": "json-server --watch DB.json --port 4001"
   },
   "dependencies": {
     "@tailwindui/react": "^0.1.1",
