@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { CONTACT_INFORMATION_STATISTICS } from '@/app/utils';
 import { useQueryClient } from 'react-query';
-import { useUpdateData } from '@/app/hooks/useUpdateData';
 import DynamicModal from '../../Common/DynamicModal';
+import { useUpdateSocialNetworks } from '@/app/hooks/useSocialNetworks';
 const { WEBSITE_URL, LINKEDIN, GITHUB, EMAIL, PHONE } =
   CONTACT_INFORMATION_STATISTICS;
 
@@ -13,7 +13,14 @@ function findSocialNetworks(socialNetworks, name) {
 }
 
 function SocialNetWorkModal({ title }) {
-  const { mutate: setContactInformation } = useUpdateData();
+  const {
+    mutate: setUpdateSocialNetworks,
+    data,
+    isError,
+    error,
+    isLoading,
+    isSuccess,
+  } = useUpdateSocialNetworks();
   const queryClient = useQueryClient();
   const socialNetworks = queryClient.getQueryData('social_networks') || [];
 
@@ -59,9 +66,21 @@ function SocialNetWorkModal({ title }) {
   ];
 
   const onSubmit = () => {
-    setContactInformation({
-      targetDataName: 'experiences',
-      updatedData: [...state],
+    const socialNetworksData = [];
+    for (const key in state) {
+      if (state.hasOwnProperty(key)) {
+        const { displayName, link, name } = state[key];
+        socialNetworksData.push({
+          display_name: displayName,
+          link,
+          name,
+        });
+      }
+    }
+
+    setUpdateSocialNetworks({
+      targetDataName: 'social_networks',
+      socialNetworksData,
     });
   };
 

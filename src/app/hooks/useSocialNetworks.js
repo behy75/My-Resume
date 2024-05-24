@@ -1,26 +1,26 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { apiRequest } from './apiRequest';
 
-export const useUpdatePersonalInformation = () => {
+export const useUpdateSocialNetworks = () => {
   const queryClient = useQueryClient();
-
+  
   return useMutation(
-    'send-personal-information',
-    payload => apiRequest('patch', 'app/personal-information', payload),
+    'send-social-networks',
+    payload => apiRequest('patch', 'app/social-networks', payload),
     {
       onSuccess: data => {
-        queryClient.setQueryData('personal-information', oldQueryData => {
-          return { ...oldQueryData, ...data.personal_information };
+        queryClient.setQueryData('social-networks', oldQueryData => {
+          return { ...oldQueryData, ...data.social_networks };
         });
       },
     }
   );
 };
 
-export const useFetchPersonalInformation = () => {
+export const useFetchSocialNetworks = () => {
   return useQuery(
-    'personal-information',
-    () => apiRequest('get', 'app/personal-information'),
+    'social-networks',
+    () => apiRequest('get', 'app/social-networks'),
     {
       cacheTime: 1000 * 60 * 60 * 24, // Cache for 24 hours
       staleTime: 1000 * 60 * 60 * 24, // Data is fresh for 24 hours
