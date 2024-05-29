@@ -2,8 +2,8 @@ import React, { useMemo } from 'react';
 import { usePrintModeStore } from '@/store';
 import SocialNetwork from './SocialNetwork';
 import SocialNetWorkModal from './SocialNetWorkModal';
-import { useFetchData } from '@/hooks/useFetchData';
 import LoadingAndError from '../../Common/LoadingAndError';
+import { useFetchSocialNetworks } from '@/hooks/useSocialNetworks';
 
 function DisplaySection({ socialNetworks, isLoading, error, isError }) {
   if (isLoading) {
@@ -18,8 +18,8 @@ function DisplaySection({ socialNetworks, isLoading, error, isError }) {
     <section className="break-inside-avoid">
       <section className="pb-4 mb-2 border-b-4 border-gray-300 break-inside-avoid">
         <ul className="pr-7 list-inside">
-          {socialNetworks.map((socialNetwork, index) => (
-            <div key={index}>
+          {socialNetworks.map(socialNetwork => (
+            <div key={socialNetwork.id}>
               {socialNetwork.name &&
                 socialNetwork.link &&
                 socialNetwork.displayName && (
@@ -45,7 +45,7 @@ export default function ContactInformation() {
     isError,
     isFetching,
     refetch,
-  } = useFetchData('social_networks');
+  } = useFetchSocialNetworks();
   const { isPrintMode } = usePrintModeStore(state => state);
 
   const showSocialNetWorkModal = useMemo(() => {
