@@ -5,6 +5,7 @@ import SummaryModal from './SummaryModal';
 import { useFetchData } from '@/hooks/useFetchData';
 import LoadingAndError from '../../Common/LoadingAndError';
 import CheckBox from '../../Common/CheckBox';
+import { useFetchSummary } from '@/hooks/useSummary';
 
 function modifySummary(summary) {
   const summaryArray = summary.split(/[,.]/);
@@ -58,13 +59,14 @@ export default function Summary() {
     state => state
   );
   const {
-    data: summary = '',
+    data = {},
     isLoading,
     error,
     isError,
     isFetching,
     refetch,
-  } = useFetchData('summary');
+  } = useFetchSummary();
+  const { message, summary = '' } = data;
 
   const showSummary = useMemo(() => {
     return !!summary && !isPrintMode;
