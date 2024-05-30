@@ -30,10 +30,12 @@ export default function DatePicker(props) {
   };
 
   useEffect(() => {
+    if (!value) return;
     if (value == 'Present') {
       setTime(currentFormattedDate());
       return;
     }
+
     const dateParts = value.split(' ');
     const year = dateParts[1];
     const month =

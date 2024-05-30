@@ -39,12 +39,7 @@ export default function School(props) {
         )}
         <li className="flex">
           <span className="font-semibold text-md">Skills: </span>
-          {skills.map((skill, skillIndex) => (
-            <div key={skillIndex}>
-              {skill}
-              {skills.length > skillIndex + 1 ? ', ' : '.'}
-            </div>
-          ))}
+          {skills}
         </li>
       </ul>
     </section>

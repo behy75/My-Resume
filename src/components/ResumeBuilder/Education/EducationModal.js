@@ -6,8 +6,13 @@ import {
 } from './EducationActions';
 import { EDUCATION_STATISTICS } from '@/utils';
 import { useQueryClient } from 'react-query';
-import { useUpdateData } from '@/hooks/useUpdateData';
 import DynamicModal from '../../Common/DynamicModal';
+import { useDeleteColleges, useUpdateColleges } from '@/hooks/useColleges';
+import { notifyError, notifySuccess } from '@/components/Common/Notify';
+import {
+  convertEpochToFormattedDate,
+  parseMonthYearToEpoch,
+} from '@/utils/common';
 const {
   SELECT_PAGE,
   REMOVE_PAGE,
@@ -22,14 +27,40 @@ const {
 } = EDUCATION_STATISTICS;
 
 function EducationModal({ title }) {
-  const { mutate: setColleges } = useUpdateData();
   const queryClient = useQueryClient();
   const colleges = queryClient.getQueryData('colleges') || [];
-
+  const {
+    mutate: setColleges,
+    data,
+    isError,
+    error,
+    isLoading,
+    isSuccess,
+  } = useUpdateColleges();
+  const {
+    mutate: deleteCollege,
+    data: deleteCollegeData,
+    isError: deleteCollegeIsError,
+    error: deleteCollegeError,
+    isLoading: deleteCollegeIsLoading,
+    isSuccess: deleteCollegeIsSuccess,
+  } = useDeleteColleges();
   const [state, setState] = useState({
-    listOfColleges: [...colleges],
+    listOfColleges: [
+      ...colleges.map(college => ({
+        nameOfCollege: college.name_of_college,
+        arrivalDate: convertEpochToFormattedDate(college.arrival_date),
+        departureDate: convertEpochToFormattedDate(college.departure_date),
+        field: college.field,
+        major: college.major,
+        minor: college.minor,
+        grade: college.grade,
+        skills: college.skills,
+      })),
+    ],
     pageNumber: 0,
   });
+  const [closeModal, setCloseModal] = useState(false);
 
   const educationFields = [
     {
@@ -43,7 +74,15 @@ function EducationModal({ title }) {
     {
       ...REMOVE_PAGE,
       value: state.listOfColleges.length,
-      setValue: () => handleRemovePage(state, setState),
+      setValue: () =>
+        handleRemovePage(
+          state,
+          setState,
+          deleteCollege,
+          deleteCollegeData,
+          deleteCollegeError,
+          deleteCollegeIsLoading
+        ),
     },
     {
       ...FIELD,
@@ -90,23 +129,63 @@ function EducationModal({ title }) {
     },
   ];
 
-  const onSubmit = () =>
-    setColleges({
-      targetDataName: 'colleges',
-      updatedData: [...state.listOfColleges],
+  const onSuccess = () => {
+    setCloseModal(true);
+    notifySuccess(data?.message || 'Colleges successfully updated.');
+    setTimeout(() => {
+      setCloseModal(false);
     });
+  };
+  const onError = () => {
+    notifyError(error?.message || 'Request failed.');
+  };
+
+  const onSubmit = () => {
+    const collegesData = state.listOfColleges.map(college => ({
+      college_id_for_user: college.collegeIdForUser,
+      name_of_college: college.nameOfCollege,
+      arrival_date: parseMonthYearToEpoch(college.arrivalDate),
+      departure_date: parseMonthYearToEpoch(college.departureDate),
+      field: college.field,
+      major: college.major,
+      minor: college.minor,
+      grade: college.grade,
+      skills: college.skills,
+    }));
+
+    const payload = { colleges: [...collegesData] };
+    setColleges(payload, { onSuccess, onError });
+  };
 
   useEffect(
     () =>
       setState(prevState => ({
         ...prevState,
-        listOfColleges: [...colleges],
+        listOfColleges: [
+          ...colleges.map(college => ({
+            collegeIdForUser: college.id,
+            nameOfCollege: college.name_of_college,
+            arrivalDate: convertEpochToFormattedDate(college.arrival_date),
+            departureDate: convertEpochToFormattedDate(college.departure_date),
+            field: college.field,
+            major: college.major,
+            minor: college.minor,
+            grade: college.grade,
+            skills: college.skills,
+          })),
+        ],
       })),
     [colleges]
   );
 
   return (
-    <DynamicModal title={title} fields={educationFields} onSubmit={onSubmit} />
+    <DynamicModal
+      title={title}
+      fields={educationFields}
+      onSubmit={onSubmit}
+      isLoading={isLoading}
+      closeModal={closeModal}
+    />
   );
 }
 

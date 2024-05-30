@@ -2,8 +2,8 @@ import React, { useMemo } from 'react';
 import { usePrintModeStore } from '@/store';
 import School from './School';
 import EducationModal from './EducationModal';
-import { useFetchData } from '@/hooks/useFetchData';
 import LoadingAndError from '../../Common/LoadingAndError';
+import { useFetchColleges } from '@/hooks/useColleges';
 
 function DisplaySection({ colleges, isLoading, error, isError }) {
   if (isLoading) {
@@ -42,7 +42,7 @@ export default function Education() {
     isError,
     isFetching,
     refetch,
-  } = useFetchData('colleges');
+  } = useFetchColleges();
   const { isPrintMode } = usePrintModeStore(state => state);
 
   const showEducationModal = useMemo(() => {
